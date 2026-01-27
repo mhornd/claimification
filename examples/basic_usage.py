@@ -13,10 +13,8 @@ from src import ClaimificationPipeline, SentenceStatus
 def main():
     """Run a basic claim extraction example."""
 
-    # Example from the explanation.md file
-    question = "What are challenges in emerging markets?"
-
-    answer = """Several emerging markets are grappling with severe economic instability. For instance, Argentina's rampant inflation, with monthly rates reaching as high as 25.5%, has made many goods unobtainable and plunged the value of the currency, causing severe economic hardship. Some experts estimate that the annual inflation rate could potentially double to 300%, while others predict even higher rates.
+    # Example text about emerging markets
+    text = """Several emerging markets are grappling with severe economic instability. For instance, Argentina's rampant inflation, with monthly rates reaching as high as 25.5%, has made many goods unobtainable and plunged the value of the currency, causing severe economic hardship. Some experts estimate that the annual inflation rate could potentially double to 300%, while others predict even higher rates.
 
 Nigeria, for example, is striving to become self-sufficient in wheat production but is hindered by climate change and violence, exacerbated by high grain prices due to the suspension of the Black Sea Grain Initiative.
 
@@ -32,7 +30,7 @@ Climate change has played a pivotal role in creating food insecurity and economi
     )
 
     # Extract claims
-    result = pipeline.extract_claims(question, answer)
+    result = pipeline.extract_claims(text)
 
     # Print results in detail
     print("\n" + "="*80)

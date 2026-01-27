@@ -21,7 +21,7 @@ class DisambiguationAgent:
 
     def __init__(
         self,
-        model: str = "gpt-4o",
+        model: str = "gpt-5-nano-2025-08-07",
         temperature: float = 0.0,
         max_tokens: int = 1000,
         max_retries: int = 3
@@ -85,9 +85,12 @@ class DisambiguationAgent:
             # Execute with retries
             for attempt in range(self.max_retries):
                 try:
-                    result: DisambiguationResult = chain.invoke({
+                    result = chain.invoke({
                         "user_prompt": user_prompt
                     })
+                    # Convert dict to DisambiguationResult if needed
+                    if isinstance(result, dict):
+                        result = DisambiguationResult(**result)
                     return StageResult(success=True, data=result)
                 except Exception as e:
                     if attempt == self.max_retries - 1:

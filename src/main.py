@@ -27,10 +27,11 @@ def format_results_markdown(result: PipelineResult) -> str:
     """
     md_lines = ["# Claim Extraction Results\n"]
 
-    # Question and Answer
-    md_lines.append(f"**Question:** {result.question}\n")
+    # Text and optional question
+    if result.question:
+        md_lines.append(f"**Question:** {result.question}\n")
     md_lines.append(
-        f"**Answer:** {result.answer[:200]}{'...' if len(result.answer) > 200 else ''}\n")
+        f"**Text:** {result.text[:200]}{'...' if len(result.text) > 200 else ''}\n")
 
     # Statistics
     stats = result.get_statistics_summary()
@@ -79,11 +80,13 @@ def format_results_json(result: PipelineResult) -> str:
         JSON string
     """
     output = {
-        "question": result.question,
-        "answer": result.answer,
+        "text": result.text,
         "statistics": result.get_statistics_summary(),
         "sentences": []
     }
+
+    if result.question:
+        output["question"] = result.question
 
     for sentence_result in result.sentence_results:
         sentence_data = {
@@ -101,25 +104,24 @@ def format_results_json(result: PipelineResult) -> str:
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="Extract factual claims from question-answer pairs"
+        description="Extract factual claims from text"
+    )
+    parser.add_argument(
+        "--text",
+        "-t",
+        type=str,
+        help="The text to extract claims from (or use --text-file)"
+    )
+    parser.add_argument(
+        "--text-file",
+        type=Path,
+        help="Path to file containing the text"
     )
     parser.add_argument(
         "--question",
         "-q",
         type=str,
-        required=True,
-        help="The question that prompted the answer"
-    )
-    parser.add_argument(
-        "--answer",
-        "-a",
-        type=str,
-        help="The answer text (or use --answer-file)"
-    )
-    parser.add_argument(
-        "--answer-file",
-        type=Path,
-        help="Path to file containing the answer"
+        help="Optional question for context"
     )
     parser.add_argument(
         "--model",
@@ -159,13 +161,13 @@ def main():
 
     args = parser.parse_args()
 
-    # Get answer text
-    if args.answer:
-        answer_text = args.answer
-    elif args.answer_file:
-        answer_text = args.answer_file.read_text(encoding="utf-8")
+    # Get text
+    if args.text:
+        text = args.text
+    elif args.text_file:
+        text = args.text_file.read_text(encoding="utf-8")
     else:
-        parser.error("Either --answer or --answer-file must be provided")
+        parser.error("Either --text or --text-file must be provided")
 
     # Initialize pipeline
     pipeline = ClaimificationPipeline(
@@ -177,8 +179,8 @@ def main():
 
     # Extract claims
     result = pipeline.extract_claims(
-        question=args.question,
-        answer=answer_text
+        text=text,
+        question=args.question
     )
 
     # Format output

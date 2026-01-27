@@ -22,7 +22,7 @@ from .stages.decomposition_agent import DecompositionAgent
 
 
 class ClaimificationPipeline:
-    """Main pipeline for extracting factual claims from Q&A pairs."""
+    """Main pipeline for extracting factual claims from text."""
 
     def __init__(
         self,
@@ -54,12 +54,12 @@ class ClaimificationPipeline:
         self.decomposition_agent = DecompositionAgent(
             model=model, temperature=temperature)
 
-    def extract_claims(self, question: str, answer: str) -> PipelineResult:
-        """Extract claims from a question-answer pair.
+    def extract_claims(self, text: str, question: Optional[str] = None) -> PipelineResult:
+        """Extract claims from text.
 
         Args:
-            question: The question that prompted the answer
-            answer: The answer text to extract claims from
+            text: The text to extract claims from
+            question: Optional question for context (for backward compatibility)
 
         Returns:
             PipelineResult containing all extracted claims and metadata
@@ -69,8 +69,9 @@ class ClaimificationPipeline:
         if self.verbose:
             self.console.print(
                 "\n[bold cyan]Starting Claimification Pipeline[/bold cyan]")
-            self.console.print(f"Question: {question[:100]}...")
-            self.console.print(f"Answer length: {len(answer)} characters\n")
+            if question:
+                self.console.print(f"Question: {question[:100]}...")
+            self.console.print(f"Text length: {len(text)} characters\n")
 
         # Stage 1: Split into sentences and create context
         if self.verbose:
@@ -78,7 +79,7 @@ class ClaimificationPipeline:
                 "[bold]Stage 1:[/bold] Splitting into sentences...")
 
         sentences = self.sentence_splitter.split_and_create_context(
-            question, answer)
+            text, question)
 
         if self.verbose:
             self.console.print(f"  ✓ Found {len(sentences)} sentences\n")
@@ -116,10 +117,10 @@ class ClaimificationPipeline:
         }
 
         pipeline_result = PipelineResult(
-            question=question,
-            answer=answer,
+            text=text,
             sentence_results=sentence_results,
-            statistics=statistics
+            statistics=statistics,
+            question=question
         )
 
         # Print summary

@@ -63,15 +63,15 @@ class PipelineResult:
     """Complete result from the Claimification pipeline.
 
     Attributes:
-        question: The original question
-        answer: The original answer text
+        text: The original text
         sentence_results: Results for each processed sentence
         statistics: Pipeline execution statistics
+        question: Optional question (for backward compatibility)
     """
-    question: str
-    answer: str
+    text: str
     sentence_results: List[ClaimExtractionResult]
     statistics: Dict[str, Any] = field(default_factory=dict)
+    question: Optional[str] = None
 
     def get_all_claims(self) -> List[Claim]:
         """Get all successfully extracted claims."""

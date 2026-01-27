@@ -16,7 +16,7 @@ class SentenceSplitter:
         self,
         context_sentences_before: int = 2,
         context_sentences_after: int = 2,
-        include_question: bool = True,
+        include_question: bool = False,
         include_headers: bool = True
     ):
         """Initialize sentence splitter.
@@ -34,24 +34,24 @@ class SentenceSplitter:
 
     def split_and_create_context(
         self,
-        question: str,
-        answer: str
+        text: str,
+        question: Optional[str] = None
     ) -> List[SentenceWithContext]:
-        """Split answer into sentences and create context for each.
+        """Split text into sentences and create context for each.
 
         Args:
-            question: The question that prompted the answer
-            answer: The answer text to split
+            text: The text to split and extract claims from
+            question: Optional question for context (for backward compatibility)
 
         Returns:
             List of SentenceWithContext objects
         """
         # Extract headers if markdown
         headers_map = self._extract_markdown_headers(
-            answer) if self.include_headers else {}
+            text) if self.include_headers else {}
 
         # Split into sentences
-        sentences = self._split_into_sentences(answer)
+        sentences = self._split_into_sentences(text)
 
         # Create context for each sentence
         results = []
@@ -70,7 +70,7 @@ class SentenceSplitter:
             metadata = SentenceMetadata(
                 position=i,
                 headers=headers_map.get(i, []),
-                paragraph=self._get_paragraph_number(answer, sentence_text)
+                paragraph=self._get_paragraph_number(text, sentence_text)
             ).to_dict()
 
             results.append(SentenceWithContext(
@@ -117,7 +117,7 @@ class SentenceSplitter:
 
     def _build_context(
         self,
-        question: str,
+        question: Optional[str],
         sentences: List[str],
         current_index: int,
         headers_map: dict
@@ -125,14 +125,14 @@ class SentenceSplitter:
         """Build context string for a sentence.
 
         Context includes:
-        - The question (if enabled)
+        - The question (if enabled and provided)
         - Surrounding sentences
         - Relevant headers
         """
         context_parts = []
 
         # Add question
-        if self.include_question:
+        if self.include_question and question:
             context_parts.append(f"**Question:** {question}")
 
         # Add headers

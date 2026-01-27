@@ -84,9 +84,12 @@ class DecompositionAgent:
             # Execute with retries
             for attempt in range(self.max_retries):
                 try:
-                    result: DecompositionResult = chain.invoke({
+                    result = chain.invoke({
                         "user_prompt": user_prompt
                     })
+                    # Convert dict to DecompositionResult if needed
+                    if isinstance(result, dict):
+                        result = DecompositionResult(**result)
                     return StageResult(success=True, data=result)
                 except Exception as e:
                     if attempt == self.max_retries - 1:
