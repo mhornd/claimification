@@ -1,0 +1,158 @@
+
+  ╔══════════════════════════════════════════════════════════════════════════════╗
+  ║                     CLAIMIFICATION N8N WORKFLOW ENTWURF                       ║
+  ╚══════════════════════════════════════════════════════════════════════════════╝
+
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 1. INPUT NODE: "Start Workflow"                                             │
+  │    - Empfängt: question (string), answer (string)                           │
+  │    - Trigger: Webhook/Manual/Schedule                                        │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 2. CODE NODE: "Sentence Splitter & Context Builder"                         │
+  │    - Split answer in einzelne Sätze                                         │
+  │    - Erstelle für jeden Satz:                                               │
+  │      • sentence_text                                                         │
+  │      • context (umgebende Sätze, Header-Hierarchie, question)               │
+  │      • sentence_id                                                           │
+  │    - Output: Array von sentence_objects                                     │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 3. LOOP NODE: "Iterate Over Sentences"                                      │
+  │    - Iteriere über jedes sentence_object                                    │
+  │    - Aktiviert Sub-Workflow für jeden Satz                                  │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                      ┌───────────────┴────────────────┐
+                      │     SUB-WORKFLOW (per Satz)     │
+                      └───────────────┬────────────────┘
+                                      │
+                                      ▼
+          ╔═══════════════════════════════════════════════════════════╗
+          ║         STAGE 2: SELECTION (Verifiable Content?)          ║
+          ╚═══════════════════════════════════════════════════════════╝
+                                      │
+                                      ▼
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 4. AGENT NODE: "Selection Agent"                                            │
+  │    - Agent Type: Basic LLM Agent / OpenAI Agent                             │
+  │    - Input: sentence_text, context                                          │
+  │    - Prompt: "Enthält dieser Satz verifiable content? Wenn ja,              │
+  │              extrahiere nur den verifizierbaren Teil. Wenn nein,            │
+  │              markiere als 'no_verifiable_content'."                         │
+  │    - Output:                                                                 │
+  │      • has_verifiable_content (boolean)                                     │
+  │      • rewritten_sentence (string, falls teilweise verifiable)              │
+  │      • reason (string)                                                       │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 5. IF NODE: "Has Verifiable Content?"                                       │
+  │    - Condition: has_verifiable_content === true                             │
+  │    - TRUE Branch → Continue                                                  │
+  │    - FALSE Branch → Label "No verifiable claims" & Skip to Output           │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                  │                                    │
+                  │ TRUE                               │ FALSE
+                  ▼                                    ▼
+          ╔═══════════════════════════════╗    ┌──────────────────────┐
+          ║  STAGE 3: DISAMBIGUATION      ║    │ Set Node: Label      │
+          ╚═══════════════════════════════╝    │ "No verifiable       │
+                  │                             │  claims"             │
+                  ▼                             └──────────────────────┘
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 6. AGENT NODE: "Disambiguation Agent"                                       │
+  │    - Agent Type: Basic LLM Agent / OpenAI Agent                             │
+  │    - Input: rewritten_sentence (oder original), context                     │
+  │    - Prompt: "Enthält dieser Satz Ambiguität? Kann die Ambiguität           │
+  │              mit dem gegebenen Kontext aufgelöst werden?                    │
+  │              Wenn ja, gib disambiguated version zurück."                    │
+  │    - Output:                                                                 │
+  │      • is_ambiguous (boolean)                                               │
+  │      • can_be_disambiguated (boolean)                                       │
+  │      • disambiguated_sentence (string)                                      │
+  │      • ambiguity_explanation (string)                                       │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 7. IF NODE: "Can Be Disambiguated?"                                         │
+  │    - Condition: !is_ambiguous OR can_be_disambiguated                       │
+  │    - TRUE Branch → Continue                                                  │
+  │    - FALSE Branch → Label "Cannot be disambiguated" & Skip to Output        │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                  │                                    │
+                  │ TRUE                               │ FALSE
+                  ▼                                    ▼
+          ╔═══════════════════════════════╗    ┌──────────────────────┐
+          ║    STAGE 4: DECOMPOSITION     ║    │ Set Node: Label      │
+          ╚═══════════════════════════════╝    │ "Cannot be           │
+                  │                             │  disambiguated"      │
+                  ▼                             └──────────────────────┘
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 8. AGENT NODE: "Decomposition Agent"                                        │
+  │    - Agent Type: Basic LLM Agent / OpenAI Agent                             │
+  │    - Input: disambiguated_sentence, context                                 │
+  │    - Prompt: "Zerlege diesen Satz in atomare, standalone claims.            │
+  │              Jeder Claim muss:                                               │
+  │              - eigenständig verständlich sein                               │
+  │              - vom Quellsatz entailed sein                                  │
+  │              - kritischen Kontext bewahren                                  │
+  │              Falls keine Claims extrahiert werden können, gib leere         │
+  │              Liste zurück."                                                 │
+  │    - Output:                                                                 │
+  │      • claims (array of strings)                                            │
+  │      • extraction_reasoning (string)                                        │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 9. IF NODE: "Claims Extracted?"                                             │
+  │    - Condition: claims.length > 0                                           │
+  │    - TRUE Branch → Label "Extracted claims"                                  │
+  │    - FALSE Branch → Label "No verifiable claims"                            │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                  │                                    │
+                  │ TRUE                               │ FALSE
+                  ▼                                    ▼
+  ┌─────────────────────────┐              ┌──────────────────────┐
+  │ Set Node: Label          │              │ Set Node: Label      │
+  │ "Extracted claims"       │              │ "No verifiable       │
+  │ + Store claims array     │              │  claims"             │
+  └─────────────────────────┘              └──────────────────────┘
+                  │                                    │
+                  └────────────────┬───────────────────┘
+                                   │
+                                   ▼
+                      ┌────────────────────────┐
+                      │  End of Sub-Workflow   │
+                      │  (Return to Loop)      │
+                      └────────────────────────┘
+                                   │
+                      Loop continues until all sentences processed
+                                   │
+                                   ▼
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 10. CODE NODE: "Aggregate Results"                                          │
+  │     - Sammle alle Ergebnisse aus Loop:                                      │
+  │       • Alle erfolgreich extrahierten claims mit source sentence            │
+  │       • Statistiken: Anzahl Sätze, Anzahl Claims, Labels                    │
+  │       • Gruppiere nach source sentence                                      │
+  │     - Output: Strukturiertes Result-Objekt                                  │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ 11. OUTPUT NODE: "Format & Return Results"                                  │
+  │     - Format: JSON/Markdown/Custom                                          │
+  │     - Enthält:                                                              │
+  │       • Original question & answer                                          │
+  │       • Pro source sentence: Label + extrahierte Claims                     │
+  │       • Metadata (Anzahl Claims, Erfolgsrate, etc.)                         │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
