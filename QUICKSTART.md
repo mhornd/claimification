@@ -81,6 +81,7 @@ python examples/basic_usage.py
 ### Python API
 
 ```python
+# Import from src module
 from src import ClaimificationPipeline
 
 pipeline = ClaimificationPipeline(model="gpt-4o")

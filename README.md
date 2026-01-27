@@ -53,7 +53,7 @@ cp .env.example .env
 ### Using Programmatically
 
 ```python
-from claimification import ClaimificationPipeline
+from src import ClaimificationPipeline
 
 # Initialize pipeline
 pipeline = ClaimificationPipeline(

@@ -1,0 +1,105 @@
+{
+  "id": "claimification",
+  "name": "Claimification",
+  "version": "1.0.0",
+  "description": "Extract verifiable factual claims from LLM-generated answers using a multi-stage AI pipeline",
+  "longDescription": "Claimification implements a sophisticated 4-stage pipeline based on research from Microsoft Research. It breaks down LLM-generated text into atomic, verifiable factual statements that can be independently fact-checked. The pipeline includes sentence splitting, verifiable content detection, ambiguity resolution, and atomic claim extraction.",
+  "author": {
+    "name": "TwoDigits",
+    "email": "info@twodigits.dev",
+    "url": "https://github.com/TwoDigits"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TwoDigits/claimification",
+    "branch": "main"
+  },
+  "homepage": "https://github.com/TwoDigits/claimification#readme",
+  "documentation": "https://github.com/TwoDigits/claimification/tree/main/docs",
+  "license": "MIT",
+  "category": "development-tools",
+  "tags": [
+    "fact-checking",
+    "claim-extraction",
+    "verification",
+    "llm",
+    "langchain",
+    "ai-safety",
+    "enterprise"
+  ],
+  "keywords": [
+    "fact-checking",
+    "claim extraction",
+    "verification",
+    "LLM safety",
+    "groundedness detection",
+    "factual claims",
+    "AI safety"
+  ],
+  "features": [
+    "4-stage claim extraction pipeline",
+    "LangChain with structured output",
+    "Multi-model support (OpenAI & Anthropic)",
+    "Type-safe Pydantic models",
+    "Rich CLI with progress tracking",
+    "Python API and CLI interface",
+    "No MCP server required"
+  ],
+  "useCases": [
+    "AI Safety & Verification",
+    "Fact-checking LLM outputs",
+    "Research & Analysis",
+    "Enterprise Compliance",
+    "Groundedness detection integration"
+  ],
+  "requires": {
+    "python": ">=3.10",
+    "claude-code": ">=1.0.0"
+  },
+  "dependencies": {
+    "langchain": ">=0.1.0",
+    "langchain-openai": ">=0.0.5",
+    "langchain-anthropic": ">=0.1.0",
+    "pydantic": ">=2.0.0",
+    "python-dotenv": ">=1.0.0",
+    "rich": ">=13.0.0"
+  },
+  "skills": [
+    {
+      "name": "extract-claims",
+      "description": "Extract verifiable factual claims from a question-answer pair",
+      "usage": "/extract-claims"
+    }
+  ],
+  "installation": {
+    "command": "pip install -r requirements.txt",
+    "env_required": [
+      "OPENAI_API_KEY",
+      "ANTHROPIC_API_KEY"
+    ],
+    "env_note": "At least one API key (OpenAI or Anthropic) is required"
+  },
+  "screenshots": [],
+  "featured": true,
+  "verified": true,
+  "lastUpdated": "2026-01-27",
+  "compatibility": {
+    "platforms": ["macOS", "Linux", "Windows"],
+    "pythonVersions": ["3.10", "3.11", "3.12"]
+  },
+  "support": {
+    "issues": "https://github.com/TwoDigits/claimification/issues",
+    "discussions": "https://github.com/TwoDigits/claimification/discussions",
+    "email": "info@twodigits.dev"
+  },
+  "research": {
+    "paperTitle": "Towards Effective Extraction and Evaluation of Factual Claims",
+    "paperAuthors": "Microsoft Research",
+    "methodology": "4-stage pipeline: Sentence Splitting, Selection, Disambiguation, Decomposition"
+  },
+  "quality": {
+    "accuracy": "99% of claims are entailed by source sentence",
+    "completeness": "Best balance between verifiable/unverifiable content",
+    "context": "Least likely to omit critical context"
+  }
+}

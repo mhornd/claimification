@@ -119,7 +119,7 @@ Use the Python API for programmatic integration.
 ### Basic Example
 
 ```python
-from claimification import ClaimificationPipeline
+from src import ClaimificationPipeline
 
 # Initialize pipeline
 pipeline = ClaimificationPipeline(
@@ -167,7 +167,7 @@ for claim in all_claims:
 ### Filter by Status
 
 ```python
-from claimification import SentenceStatus
+from src import SentenceStatus
 
 # Get only successfully extracted sentences
 successful = [
@@ -185,6 +185,8 @@ ambiguous = [
 ### Custom Configuration
 
 ```python
+from src import ClaimificationPipeline
+
 pipeline = ClaimificationPipeline(
     model="claude-3-5-sonnet-20241022",  # Use Claude instead of GPT
     temperature=0.1,                      # Slightly less deterministic
@@ -327,6 +329,8 @@ for sentence in ambiguous:
 For multiple Q&A pairs, reuse the pipeline instance:
 
 ```python
+from src import ClaimificationPipeline
+
 pipeline = ClaimificationPipeline()
 
 for qa_pair in qa_pairs:
