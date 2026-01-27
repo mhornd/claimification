@@ -1,7 +1,7 @@
 {
   "name": "claimification",
-  "version": "1.0.4",
-  "description": "Extract and verify factual claims from LLM-generated answers using a multi-stage pipeline",
+  "version": "1.0.5",
+  "description": "Extract and verify factual claims from any text",
   "author": {
     "name": "Marlo Horndasch",
     "email": "private",
