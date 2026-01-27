@@ -1,0 +1,30 @@
+[ Input question & answer ]
+              |
+              v
+[ Split into sentences & create context ]
+              |
+              v
+            ( per sentence )
+                  |
+                  v
+               /----------------------------------\
+              |  Contains any verifiable content? |
+              \----------------------------------/
+                  | Yes                     | No
+                  v                         v
+     /----------------------------------\    ✗ No verifiable claims
+     | Contains ambiguity that cannot  |
+     | be resolved?                     |
+     \----------------------------------/
+          | No                        | Yes
+          v                           v
+ /----------------------------------\    ✗ Cannot be disambiguated
+ | Decomposed into at least one     |
+ | claim?                           |
+ \----------------------------------/
+      | Yes                    | No
+      v                        v
+  ✓ Extracted claims         ✗ No verifiable claims
+
+
+Figure 1: Overview of Claimify’s stages
