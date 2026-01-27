@@ -1,7 +1,7 @@
 {
   "id": "claimification",
   "name": "Claimification",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Extract and verify factual claims from any text",
   "longDescription": "Claimification implements a sophisticated 4-stage pipeline based on research from Microsoft Research. It breaks down text into atomic, verifiable factual statements that can be independently fact-checked. The pipeline includes sentence splitting, verifiable content detection, ambiguity resolution, and atomic claim extraction.",
   "author": {
@@ -41,9 +41,9 @@
     "LangChain with structured output",
     "Multi-model support (OpenAI & Anthropic)",
     "Type-safe Pydantic models",
-    "Rich CLI with progress tracking",
+    "MCP Server for seamless Claude Code integration",
     "Python API and CLI interface",
-    "No MCP server required"
+    "STDIO-based MCP transport (no network setup)"
   ],
   "useCases": [
     "AI Safety & Verification",
@@ -62,15 +62,19 @@
     "langchain-anthropic": ">=0.1.0",
     "pydantic": ">=2.0.0",
     "python-dotenv": ">=1.0.0",
-    "rich": ">=13.0.0"
+    "rich": ">=13.0.0",
+    "mcp": ">=1.0.0"
   },
-  "skills": [
-    {
-      "name": "extract-claims",
-      "description": "Extract verifiable factual claims from any text input",
-      "usage": "/extract-claims"
+  "mcpServers": {
+    "claimification": {
+      "command": "python",
+      "args": ["mcp_server.py"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+      }
     }
-  ],
+  },
   "installation": {
     "command": "pip install -r requirements.txt",
     "env_required": ["OPENAI_API_KEY", "ANTHROPIC_API_KEY"],
