@@ -47,9 +47,12 @@ class ClaimificationPipeline:
             context_sentences_before=context_sentences,
             context_sentences_after=context_sentences
         )
-        self.selection_agent = SelectionAgent(model=model, temperature=temperature)
-        self.disambiguation_agent = DisambiguationAgent(model=model, temperature=temperature)
-        self.decomposition_agent = DecompositionAgent(model=model, temperature=temperature)
+        self.selection_agent = SelectionAgent(
+            model=model, temperature=temperature)
+        self.disambiguation_agent = DisambiguationAgent(
+            model=model, temperature=temperature)
+        self.decomposition_agent = DecompositionAgent(
+            model=model, temperature=temperature)
 
     def extract_claims(self, question: str, answer: str) -> PipelineResult:
         """Extract claims from a question-answer pair.
@@ -64,15 +67,18 @@ class ClaimificationPipeline:
         start_time = time.time()
 
         if self.verbose:
-            self.console.print("\n[bold cyan]Starting Claimification Pipeline[/bold cyan]")
+            self.console.print(
+                "\n[bold cyan]Starting Claimification Pipeline[/bold cyan]")
             self.console.print(f"Question: {question[:100]}...")
             self.console.print(f"Answer length: {len(answer)} characters\n")
 
         # Stage 1: Split into sentences and create context
         if self.verbose:
-            self.console.print("[bold]Stage 1:[/bold] Splitting into sentences...")
+            self.console.print(
+                "[bold]Stage 1:[/bold] Splitting into sentences...")
 
-        sentences = self.sentence_splitter.split_and_create_context(question, answer)
+        sentences = self.sentence_splitter.split_and_create_context(
+            question, answer)
 
         if self.verbose:
             self.console.print(f"  ✓ Found {len(sentences)} sentences\n")
@@ -252,11 +258,14 @@ class ClaimificationPipeline:
         stats = result.get_statistics_summary()
 
         self.console.print("\n[bold green]Pipeline Complete![/bold green]")
-        self.console.print(f"⏱️  Time: {result.statistics['total_time_seconds']}s")
+        self.console.print(
+            f"⏱️  Time: {result.statistics['total_time_seconds']}s")
         self.console.print(f"📝 Sentences: {stats['total_sentences']}")
         self.console.print(f"✅ Claims extracted: {stats['total_claims']}")
-        self.console.print(f"❌ No verifiable claims: {stats['no_verifiable_claims']}")
-        self.console.print(f"⚠️  Cannot disambiguate: {stats['cannot_disambiguate']}")
+        self.console.print(
+            f"❌ No verifiable claims: {stats['no_verifiable_claims']}")
+        self.console.print(
+            f"⚠️  Cannot disambiguate: {stats['cannot_disambiguate']}")
 
         if stats['processing_error'] > 0:
             self.console.print(f"🔴 Errors: {stats['processing_error']}")

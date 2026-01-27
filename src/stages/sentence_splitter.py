@@ -47,7 +47,8 @@ class SentenceSplitter:
             List of SentenceWithContext objects
         """
         # Extract headers if markdown
-        headers_map = self._extract_markdown_headers(answer) if self.include_headers else {}
+        headers_map = self._extract_markdown_headers(
+            answer) if self.include_headers else {}
 
         # Split into sentences
         sentences = self._split_into_sentences(answer)
@@ -147,7 +148,8 @@ class SentenceSplitter:
             context_parts.append(f"**Before:** {preceding}")
 
         # Add following sentences
-        end_idx = min(len(sentences), current_index + self.context_sentences_after + 1)
+        end_idx = min(len(sentences), current_index +
+                      self.context_sentences_after + 1)
         if end_idx > current_index + 1:
             following = " ".join(sentences[current_index + 1:end_idx])
             context_parts.append(f"**After:** {following}")

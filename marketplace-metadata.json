@@ -5,17 +5,17 @@
   "description": "Extract verifiable factual claims from LLM-generated answers using a multi-stage AI pipeline",
   "longDescription": "Claimification implements a sophisticated 4-stage pipeline based on research from Microsoft Research. It breaks down LLM-generated text into atomic, verifiable factual statements that can be independently fact-checked. The pipeline includes sentence splitting, verifiable content detection, ambiguity resolution, and atomic claim extraction.",
   "author": {
-    "name": "TwoDigits",
-    "email": "info@twodigits.dev",
-    "url": "https://github.com/TwoDigits"
+    "name": "Marlo Horndasch",
+    "email": "private",
+    "url": "https://github.com/mhornd"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TwoDigits/claimification",
+    "url": "https://github.com/mhornd/claimification",
     "branch": "main"
   },
-  "homepage": "https://github.com/TwoDigits/claimification#readme",
-  "documentation": "https://github.com/TwoDigits/claimification/tree/main/docs",
+  "homepage": "https://github.com/mhornd/claimification#readme",
+  "documentation": "https://github.com/mhornd/claimification/tree/main/docs",
   "license": "MIT",
   "category": "development-tools",
   "tags": [
@@ -67,16 +67,13 @@
   "skills": [
     {
       "name": "extract-claims",
-      "description": "Extract verifiable factual claims from a question-answer pair",
+      "description": "Extract verifiable factual claims from any text input",
       "usage": "/extract-claims"
     }
   ],
   "installation": {
     "command": "pip install -r requirements.txt",
-    "env_required": [
-      "OPENAI_API_KEY",
-      "ANTHROPIC_API_KEY"
-    ],
+    "env_required": ["OPENAI_API_KEY", "ANTHROPIC_API_KEY"],
     "env_note": "At least one API key (OpenAI or Anthropic) is required"
   },
   "screenshots": [],
@@ -88,13 +85,11 @@
     "pythonVersions": ["3.10", "3.11", "3.12"]
   },
   "support": {
-    "issues": "https://github.com/TwoDigits/claimification/issues",
-    "discussions": "https://github.com/TwoDigits/claimification/discussions",
-    "email": "info@twodigits.dev"
+    "email": "private"
   },
   "research": {
     "paperTitle": "Towards Effective Extraction and Evaluation of Factual Claims",
-    "paperAuthors": "Microsoft Research",
+    "paperAuthors": "Metropolitansky & Larson (2025)",
     "methodology": "4-stage pipeline: Sentence Splitting, Selection, Disambiguation, Decomposition"
   },
   "quality": {

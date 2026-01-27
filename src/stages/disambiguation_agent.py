@@ -56,7 +56,8 @@ class DisambiguationAgent:
             raise ValueError(f"Unsupported model: {model}")
 
         # Create structured output LLM
-        self.structured_llm = self.llm.with_structured_output(DisambiguationResult)
+        self.structured_llm = self.llm.with_structured_output(
+            DisambiguationResult)
 
         # Create prompt template
         self.prompt = ChatPromptTemplate.from_messages([

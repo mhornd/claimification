@@ -29,7 +29,8 @@ def format_results_markdown(result: PipelineResult) -> str:
 
     # Question and Answer
     md_lines.append(f"**Question:** {result.question}\n")
-    md_lines.append(f"**Answer:** {result.answer[:200]}{'...' if len(result.answer) > 200 else ''}\n")
+    md_lines.append(
+        f"**Answer:** {result.answer[:200]}{'...' if len(result.answer) > 200 else ''}\n")
 
     # Statistics
     stats = result.get_statistics_summary()
@@ -58,7 +59,8 @@ def format_results_markdown(result: PipelineResult) -> str:
         elif sentence_result.status == SentenceStatus.NO_VERIFIABLE_CLAIMS:
             md_lines.append("*❌ No verifiable claims*\n")
         elif sentence_result.status == SentenceStatus.CANNOT_DISAMBIGUATE:
-            explanation = sentence_result.metadata.get('ambiguity_explanation', 'Unknown')
+            explanation = sentence_result.metadata.get(
+                'ambiguity_explanation', 'Unknown')
             md_lines.append(f"*⚠️ Cannot be disambiguated: {explanation}*\n")
         elif sentence_result.status == SentenceStatus.PROCESSING_ERROR:
             error = sentence_result.metadata.get('error', 'Unknown error')

@@ -55,7 +55,8 @@ class DecompositionAgent:
             raise ValueError(f"Unsupported model: {model}")
 
         # Create structured output LLM
-        self.structured_llm = self.llm.with_structured_output(DecompositionResult)
+        self.structured_llm = self.llm.with_structured_output(
+            DecompositionResult)
 
         # Create prompt template
         self.prompt = ChatPromptTemplate.from_messages([
