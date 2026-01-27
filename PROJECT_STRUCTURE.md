@@ -114,16 +114,19 @@ Aggregated Result
 Each stage uses a specialized LangChain agent:
 
 **Selection Agent:**
+
 - Type: `ChatOpenAI` with structured output
 - Purpose: Binary classification + rewriting
 - Output Schema: `SelectionResult` (has_verifiable_content, rewritten_sentence, reason)
 
 **Disambiguation Agent:**
+
 - Type: `ChatOpenAI` with structured output
 - Purpose: Ambiguity detection and resolution
 - Output Schema: `DisambiguationResult` (is_ambiguous, can_be_disambiguated, disambiguated_sentence)
 
 **Decomposition Agent:**
+
 - Type: `ChatOpenAI` with structured output
 - Purpose: Claim extraction
 - Output Schema: `DecompositionResult` (claims: List[str], extraction_reasoning)
@@ -134,7 +137,7 @@ Each stage uses a specialized LangChain agent:
 # config.py
 CLAIMIFICATION_CONFIG = {
     "llm": {
-        "model": "gpt-4o",  # or anthropic/claude-3-5-sonnet-20241022
+        "model": "gpt-5-nano-2025-08-07",  # or anthropic/claude-3-5-sonnet-20241022
         "temperature": 0.0,  # Deterministic for claim extraction
         "max_tokens": 2000
     },
@@ -154,6 +157,7 @@ CLAIMIFICATION_CONFIG = {
 ## Data Models
 
 ### Sentence Model
+
 ```python
 @dataclass
 class SentenceWithContext:
@@ -164,6 +168,7 @@ class SentenceWithContext:
 ```
 
 ### Result Models
+
 ```python
 @dataclass
 class SelectionResult:
@@ -218,15 +223,14 @@ class ClaimExtractionResult:
 name: extract-claims
 description: Extract verifiable factual claims from a question-answer pair
 ---
-
 # Claim Extraction Skill
 
 Use this skill to extract factual claims from LLM-generated answers.
-
 ## Usage
-
 ```
+
 /extract-claims
+
 ```
 
 This will:
@@ -256,6 +260,7 @@ For each sentence in the answer:
 ## Implementation Plan
 
 ### Phase 1: Core Pipeline (Priority)
+
 1. ✅ Create project structure
 2. ⬜ Implement `SentenceSplitter` (Stage 1)
 3. ⬜ Implement `SelectionAgent` with LangChain (Stage 2)
@@ -264,17 +269,20 @@ For each sentence in the answer:
 6. ⬜ Create `Pipeline` orchestrator
 
 ### Phase 2: Claude Code Integration
+
 7. ⬜ Create plugin manifest
 8. ⬜ Implement `extract-claims` skill
 9. ⬜ Add CLI interface
 
 ### Phase 3: Testing & Documentation
+
 10. ⬜ Write unit tests for each stage
 11. ⬜ Create integration tests
 12. ⬜ Write comprehensive README
 13. ⬜ Create usage examples
 
 ### Phase 4: Marketplace Preparation
+
 14. ⬜ Add metadata for TwoDigits Marketplace
 15. ⬜ Security review
 16. ⬜ Performance optimization
@@ -282,18 +290,21 @@ For each sentence in the answer:
 ## Technical Decisions
 
 ### Why LangChain?
+
 - **Structured Output:** Native support for JSON schema validation
 - **Agent Abstraction:** Clean separation of prompt + model + parser
 - **Retry Logic:** Built-in error handling
 - **Model Agnostic:** Easy to switch between OpenAI/Anthropic/etc.
 
 ### Why NOT MCP Server?
+
 - **Direct Integration:** Runs as native Python code in Claude Code
 - **Simpler Deployment:** No server process to manage
 - **Lower Latency:** Direct function calls
 - **Better Control:** Full pipeline visibility
 
 ### Why Python?
+
 - **LangChain Native:** Best LangChain support
 - **Rich NLP Tools:** spaCy, NLTK for sentence splitting
 - **Type Safety:** Pydantic models for structured output
@@ -329,7 +340,7 @@ OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
 
 # Model configuration
-CLAIMIFICATION_MODEL=gpt-4o
+CLAIMIFICATION_MODEL=gpt-5-nano-2025-08-07
 CLAIMIFICATION_TEMPERATURE=0.0
 
 # Context configuration
@@ -343,7 +354,7 @@ from claimification import ClaimificationPipeline
 
 # Initialize pipeline
 pipeline = ClaimificationPipeline(
-    model="gpt-4o",
+    model="gpt-5-nano-2025-08-07",
     temperature=0.0
 )
 

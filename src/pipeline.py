@@ -26,7 +26,7 @@ class ClaimificationPipeline:
 
     def __init__(
         self,
-        model: str = "gpt-4o",
+        model: str = "gpt-5-nano-2025-08-07",
         temperature: float = 0.0,
         context_sentences: int = 2,
         verbose: bool = True

@@ -60,7 +60,7 @@ from src import ClaimificationPipeline
 
 # Initialize pipeline
 pipeline = ClaimificationPipeline(
-    model="gpt-4o",
+    model="gpt-5-nano-2025-08-07",
     temperature=0.0
 )
 
@@ -156,7 +156,7 @@ See [docs/PRINCIPLES.md](docs/PRINCIPLES.md) for detailed explanations.
 
 - 🔧 **LangChain-based Architecture** - Modular, extensible agent pipeline
 - 🎯 **Structured Output** - Reliable, type-safe results using Pydantic
-- 🔄 **Multi-Model Support** - Works with OpenAI (GPT-4, GPT-4o) and Anthropic (Claude 3.5)
+- 🔄 **Multi-Model Support** - Works with OpenAI (GPT-4, GPT-5-nano) and Anthropic (Claude 3.5)
 - 📊 **Rich CLI Output** - Beautiful progress indicators and formatted results
 - 🧪 **Comprehensive Testing** - Full test coverage for all stages
 - 📝 **Excellent Documentation** - Detailed guides and examples
@@ -172,7 +172,7 @@ OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
 
 # Model Configuration
-CLAIMIFICATION_MODEL=gpt-4o
+CLAIMIFICATION_MODEL=gpt-5-nano-2025-08-07
 CLAIMIFICATION_TEMPERATURE=0.0
 CLAIMIFICATION_MAX_TOKENS=2000
 

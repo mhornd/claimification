@@ -19,6 +19,7 @@ Claimification processes question-answer pairs through four stages:
 ## When to Use
 
 Use this skill when you need to:
+
 - Verify LLM outputs for factual accuracy
 - Extract structured claims for fact-checking
 - Identify which parts of an answer are verifiable
@@ -31,16 +32,19 @@ Use this skill when you need to:
 ```
 
 Claude will ask you for:
+
 1. The **question** that prompted the answer
 2. The **answer** text to analyze
 
 ## Example
 
 **Input:**
+
 - Question: "What are the economic challenges in Argentina?"
 - Answer: "Argentina's rampant inflation, with monthly rates reaching as high as 25.5%, has made many goods unobtainable and plunged the value of the currency, causing severe economic hardship."
 
 **Output:**
+
 ```
 A. Argentina's rampant inflation, with monthly rates reaching as high as 25.5%, has made many goods unobtainable and plunged the value of the currency, causing severe economic hardship.
 
@@ -54,6 +58,7 @@ A. Argentina's rampant inflation, with monthly rates reaching as high as 25.5%, 
 ## Output Format
 
 For each sentence in the answer:
+
 - **Source Sentence:** The original sentence
 - **Status:**
   - ✅ `extracted` - Claims successfully extracted
@@ -73,7 +78,7 @@ OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
 
 # Model selection
-CLAIMIFICATION_MODEL=gpt-4o  # or claude-3-5-sonnet-20241022
+CLAIMIFICATION_MODEL=gpt-5-nano-2025-08-07  # or claude-3-5-sonnet-20241022
 
 # Context window
 CLAIMIFICATION_CONTEXT_SENTENCES=2  # sentences before/after for context
@@ -100,13 +105,15 @@ Claimification follows these principles:
 ## Technical Details
 
 **Pipeline Architecture:**
+
 - Built with LangChain for agent orchestration
 - Uses structured output for reliable parsing
 - Temperature set to 0.0 for deterministic results
 - Automatic retry logic for API failures
 
 **Models Supported:**
-- OpenAI: GPT-4, GPT-4o, GPT-3.5-turbo
+
+- OpenAI: GPT-4, GPT-5-nano, GPT-3.5-turbo
 - Anthropic: Claude 3.5 Sonnet, Claude 3 Opus
 
 ## Related

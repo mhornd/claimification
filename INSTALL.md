@@ -23,6 +23,7 @@ python -m src.main --question "Your question" --answer "Your answer"
 ```
 
 **Import in Python:**
+
 ```python
 from src import ClaimificationPipeline
 ```
@@ -48,11 +49,13 @@ pip install -e .
 **After pip install, you can:**
 
 1. **Use the command:**
+
 ```bash
 claimification --question "Your question" --answer "Your answer"
 ```
 
 2. **Import in Python:**
+
 ```python
 from src import ClaimificationPipeline
 ```
@@ -81,6 +84,7 @@ Best for: Using with Claude Code in your development workflow.
 ## Package Structure Explanation
 
 Claimification uses a common pattern where:
+
 - **Package name:** `claimification` (for pip install, command line)
 - **Module name:** `src` (for Python imports)
 
@@ -124,7 +128,7 @@ export OPENAI_API_KEY=sk-proj-...
 export ANTHROPIC_API_KEY=sk-ant-...
 
 # Optional configuration
-export CLAIMIFICATION_MODEL=gpt-4o
+export CLAIMIFICATION_MODEL=gpt-5-nano-2025-08-07
 export CLAIMIFICATION_TEMPERATURE=0.0
 export CLAIMIFICATION_CONTEXT_SENTENCES=2
 ```

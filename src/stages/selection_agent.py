@@ -21,7 +21,7 @@ class SelectionAgent:
 
     def __init__(
         self,
-        model: str = "gpt-4o",
+        model: str = "gpt-5-nano-2025-08-07",
         temperature: float = 0.0,
         max_tokens: int = 1000,
         max_retries: int = 3
@@ -29,7 +29,7 @@ class SelectionAgent:
         """Initialize the Selection Agent.
 
         Args:
-            model: LLM model to use (e.g., "gpt-4o", "claude-3-5-sonnet-20241022")
+            model: LLM model to use (e.g., "gpt-5-nano-2025-08-07", "claude-3-5-sonnet-20241022")
             temperature: Temperature for LLM (0.0 for deterministic)
             max_tokens: Maximum tokens for response
             max_retries: Maximum number of retries on failure

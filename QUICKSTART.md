@@ -84,7 +84,7 @@ python examples/basic_usage.py
 # Import from src module
 from src import ClaimificationPipeline
 
-pipeline = ClaimificationPipeline(model="gpt-4o")
+pipeline = ClaimificationPipeline(model="gpt-5-nano-2025-08-07")
 result = pipeline.extract_claims(
     question="What are challenges in Argentina?",
     answer="Argentina's inflation rate reached 25.5%..."
@@ -119,17 +119,17 @@ Question + Answer
 └─────────────────────────┘
     ↓
 ┌─────────────────────────┐
-│ Stage 2: Selection       │  ← LangChain Agent (GPT-4o/Claude)
+│ Stage 2: Selection       │  ← LangChain Agent (GPT-5-nano/Claude)
 │ (Verifiable Content?)    │
 └─────────────────────────┘
     ↓
 ┌─────────────────────────┐
-│ Stage 3: Disambiguation  │  ← LangChain Agent (GPT-4o/Claude)
+│ Stage 3: Disambiguation  │  ← LangChain Agent (GPT-5-nano/Claude)
 │ (Resolve Ambiguity?)     │
 └─────────────────────────┘
     ↓
 ┌─────────────────────────┐
-│ Stage 4: Decomposition   │  ← LangChain Agent (GPT-4o/Claude)
+│ Stage 4: Decomposition   │  ← LangChain Agent (GPT-5-nano/Claude)
 │ (Extract Claims)         │
 └─────────────────────────┘
     ↓
@@ -150,7 +150,7 @@ Alle Einstellungen können über Environment-Variablen gesteuert werden:
 
 ```bash
 # Model
-CLAIMIFICATION_MODEL=gpt-4o  # oder claude-3-5-sonnet-20241022
+CLAIMIFICATION_MODEL=gpt-5-nano-2025-08-07  # oder claude-3-5-sonnet-20241022
 
 # Context
 CLAIMIFICATION_CONTEXT_SENTENCES=2
@@ -162,10 +162,12 @@ CLAIMIFICATION_TEMPERATURE=0.0
 ## Beispiel Output
 
 **Input:**
+
 - Question: "What are challenges in Argentina?"
 - Answer: "Argentina's inflation, reaching 25.5%, caused hardship."
 
 **Output:**
+
 ```
 A. Argentina's inflation, reaching 25.5%, caused hardship.
 

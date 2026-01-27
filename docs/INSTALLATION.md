@@ -41,6 +41,7 @@ nano .env  # or your preferred editor
 ```
 
 Add one of these to your `.env`:
+
 ```bash
 OPENAI_API_KEY=sk-proj-...
 # OR
@@ -121,7 +122,8 @@ pytest tests/
 3. Add to `.env` or export as environment variable
 
 **Supported Models:**
-- `gpt-4o` (recommended)
+
+- `gpt-5-nano-2025-08-07` (recommended)
 - `gpt-4`
 - `gpt-3.5-turbo`
 
@@ -132,6 +134,7 @@ pytest tests/
 3. Add to `.env` or export as environment variable
 
 **Supported Models:**
+
 - `claude-3-5-sonnet-20241022` (recommended)
 - `claude-3-opus-20240229`
 
@@ -150,6 +153,7 @@ Update `src/stages/sentence_splitter.py` to use spaCy instead of regex.
 ### "Module not found" Error
 
 Make sure you're in the correct directory and virtual environment is activated:
+
 ```bash
 pwd  # Should show .../claimification
 which python  # Should show venv/bin/python
@@ -158,11 +162,13 @@ which python  # Should show venv/bin/python
 ### API Key Not Found
 
 Verify environment variable is set:
+
 ```bash
 echo $OPENAI_API_KEY  # or $ANTHROPIC_API_KEY
 ```
 
 If using `.env` file, make sure it's in the project root:
+
 ```bash
 ls -la .env
 ```
@@ -170,6 +176,7 @@ ls -la .env
 ### Import Error with LangChain
 
 Reinstall dependencies:
+
 ```bash
 pip install --upgrade -r requirements.txt
 ```

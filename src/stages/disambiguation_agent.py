@@ -29,7 +29,7 @@ class DisambiguationAgent:
         """Initialize the Disambiguation Agent.
 
         Args:
-            model: LLM model to use (e.g., "gpt-4o", "claude-3-5-sonnet-20241022")
+            model: LLM model to use (e.g., "gpt-5-nano-2025-08-07", "claude-3-5-sonnet-20241022")
             temperature: Temperature for LLM (0.0 for deterministic)
             max_tokens: Maximum tokens for response
             max_retries: Maximum number of retries on failure

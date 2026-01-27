@@ -20,6 +20,7 @@ The simplest way to use Claimification is through the Claude Code skill.
 ```
 
 Claude will prompt you for:
+
 1. The question that prompted the answer
 2. The answer text to analyze
 
@@ -123,7 +124,7 @@ from src import ClaimificationPipeline
 
 # Initialize pipeline
 pipeline = ClaimificationPipeline(
-    model="gpt-4o",
+    model="gpt-5-nano-2025-08-07",
     temperature=0.0,
     context_sentences=2,
     verbose=True
@@ -208,7 +209,7 @@ OPENAI_API_KEY=sk-proj-...
 ANTHROPIC_API_KEY=sk-ant-...
 
 # Model Configuration (optional)
-CLAIMIFICATION_MODEL=gpt-4o
+CLAIMIFICATION_MODEL=gpt-5-nano-2025-08-07
 CLAIMIFICATION_TEMPERATURE=0.0
 CLAIMIFICATION_MAX_TOKENS=2000
 
@@ -225,11 +226,13 @@ CLAIMIFICATION_TIMEOUT_SECONDS=30
 ### Model Selection
 
 **OpenAI Models:**
-- `gpt-4o` (recommended) - Best balance of quality and speed
+
+- `gpt-5-nano-2025-08-07` (recommended) - Best balance of quality and speed
 - `gpt-4` - Highest quality, slower
 - `gpt-3.5-turbo` - Faster, lower cost, slightly lower quality
 
 **Anthropic Models:**
+
 - `claude-3-5-sonnet-20241022` (recommended) - Best overall
 - `claude-3-opus-20240229` - Highest quality
 
@@ -301,7 +304,7 @@ The question provides important context. Be specific:
 
 ### 2. Use Appropriate Models
 
-- **gpt-4o**: Best default choice
+- **gpt-5-nano-2025-08-07**: Best default choice
 - **claude-3-5-sonnet**: Alternative with different strengths
 - **gpt-3.5-turbo**: Only for cost-sensitive applications
 
@@ -345,20 +348,20 @@ for qa_pair in qa_pairs:
 
 ### Slow Processing
 
-- Use `gpt-4o` instead of `gpt-4`
+- Use `gpt-5-nano-2025-08-07` instead of `gpt-4`
 - Reduce `context_sentences`
 - Consider parallel processing for multiple Q&A pairs
 
 ### High API Costs
 
-- Use `gpt-3.5-turbo` instead of `gpt-4o`
+- Use `gpt-3.5-turbo` instead of `gpt-5-nano-2025-08-07`
 - Reduce answer length before processing
 - Batch similar questions
 
 ### Poor Quality Claims
 
 - Increase `context_sentences`
-- Use `gpt-4o` or `claude-3-5-sonnet`
+- Use `gpt-5-nano-2025-08-07` or `claude-3-5-sonnet`
 - Provide more specific questions
 - Review the source answer quality
 

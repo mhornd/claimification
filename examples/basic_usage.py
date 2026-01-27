@@ -1,13 +1,12 @@
 """Basic usage example for Claimification."""
 
+from src import ClaimificationPipeline, SentenceStatus
 import os
 from pathlib import Path
 import sys
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from src import ClaimificationPipeline, SentenceStatus
 
 
 def main():
@@ -23,7 +22,7 @@ Climate change has played a pivotal role in creating food insecurity and economi
     # Initialize pipeline
     # Make sure OPENAI_API_KEY or ANTHROPIC_API_KEY is set in environment
     pipeline = ClaimificationPipeline(
-        model=os.getenv("CLAIMIFICATION_MODEL", "gpt-4o"),
+        model=os.getenv("CLAIMIFICATION_MODEL", "gpt-5-nano-2025-08-07"),
         temperature=0.0,
         context_sentences=2,
         verbose=True
@@ -50,7 +49,8 @@ Climate change has played a pivotal role in creating food insecurity and economi
             reason = sentence_result.metadata.get('reason', 'Unknown')
             print(f"   ❌ No verifiable claims: {reason}\n")
         elif sentence_result.status == SentenceStatus.CANNOT_DISAMBIGUATE:
-            explanation = sentence_result.metadata.get('ambiguity_explanation', 'Unknown')
+            explanation = sentence_result.metadata.get(
+                'ambiguity_explanation', 'Unknown')
             print(f"   ⚠️  Cannot disambiguate: {explanation}\n")
         else:
             error = sentence_result.metadata.get('error', 'Unknown')
@@ -63,7 +63,8 @@ Climate change has played a pivotal role in creating food insecurity and economi
     print("="*80)
     print(f"Total sentences: {stats['total_sentences']}")
     print(f"Total claims extracted: {stats['total_claims']}")
-    print(f"Success rate: {stats['extracted']}/{stats['total_sentences']} sentences")
+    print(
+        f"Success rate: {stats['extracted']}/{stats['total_sentences']} sentences")
 
 
 if __name__ == "__main__":

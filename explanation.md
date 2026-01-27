@@ -5,7 +5,7 @@ A common strategy for fact-checking LLM-generated texts – especially complex, 
 Our paper “Towards Effective Extraction and Evaluation of Factual Claims” proposes a framework for evaluating claim extraction and introduces Claimification, a novel LLM-based method that outperforms prior solutions. In this blog post, we discuss common claim extraction issues and explore Claimification’s approach.
 
 Key issues in claim extraction
-As a case study, we prompted OpenAI’s GPT-4o model to “provide an overview of challenges in emerging markets” based on a collection of news articles. Here is its output:
+As a case study, we prompted OpenAI’s GPT-5-nano model to “provide an overview of challenges in emerging markets” based on a collection of news articles. Here is its output:
 
 # Emerging market challenges
 

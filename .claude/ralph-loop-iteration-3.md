@@ -11,11 +11,13 @@
 **Problem:** Documentation showed incorrect import path
 
 **Incorrect (in previous docs):**
+
 ```python
 from claimification import ClaimificationPipeline  # ❌ Won't work!
 ```
 
 **Correct:**
+
 ```python
 from src import ClaimificationPipeline  # ✅ Works!
 ```
@@ -23,6 +25,7 @@ from src import ClaimificationPipeline  # ✅ Works!
 **Why:** The package is installed as "claimification" but the Python module is "src". This is intentional and follows common Python patterns (like `sklearn` which imports as `sklearn` despite being installed as `scikit-learn`).
 
 **Files Fixed:**
+
 1. ✅ `README.md` - Corrected import example
 2. ✅ `docs/USAGE.md` - Corrected all 4 import examples
 3. ✅ `QUICKSTART.md` - Added clarification comment
@@ -52,6 +55,7 @@ A comprehensive installation guide that explains:
    - `/extract-claims` skill usage
 
 **Key Addition:** Clear explanation of package structure:
+
 - **Package name:** `claimification` (for pip/CLI)
 - **Module name:** `src` (for imports)
 
@@ -61,13 +65,13 @@ This clarifies the intentional design and prevents confusion.
 
 ## Final Verification - All Requirements Met ✅
 
-| Requirement | Status | Verification |
-|-------------|--------|--------------|
-| 1. Kein MCP Server | ✅ | Pure Python, no MCP dependencies |
-| 2. LangChain Structured Output | ✅ | All agents use `.with_structured_output()` |
-| 3. Multi-Model Support | ✅ | OpenAI & Anthropic fully implemented |
-| 4. Rich CLI Output | ✅ | Progress bars, colors, markdown |
-| 5. Marketplace-Ready | ✅ | Complete docs, tests, metadata |
+| Requirement                    | Status | Verification                               |
+| ------------------------------ | ------ | ------------------------------------------ |
+| 1. Kein MCP Server             | ✅     | Pure Python, no MCP dependencies           |
+| 2. LangChain Structured Output | ✅     | All agents use `.with_structured_output()` |
+| 3. Multi-Model Support         | ✅     | OpenAI & Anthropic fully implemented       |
+| 4. Rich CLI Output             | ✅     | Progress bars, colors, markdown            |
+| 5. Marketplace-Ready           | ✅     | Complete docs, tests, metadata             |
 
 ### Additional Quality Markers ✅
 
@@ -88,6 +92,7 @@ This clarifies the intentional design and prevents confusion.
 **Total Files:** 41 files (+2 from iteration 2)
 
 ### Source Code (15 files)
+
 ```
 src/
 ├── __init__.py ✅ (fixed in iteration 2)
@@ -114,6 +119,7 @@ src/
 ```
 
 ### Tests (3 files) - Added in Iteration 2
+
 ```
 tests/
 ├── __init__.py
@@ -122,6 +128,7 @@ tests/
 ```
 
 ### Documentation (13 files)
+
 ```
 docs/
 ├── INSTALLATION.md
@@ -142,6 +149,7 @@ Root:
 ```
 
 ### Configuration (7 files)
+
 ```
 ├── .claude-plugin/plugin.json
 ├── pyproject.toml
@@ -153,6 +161,7 @@ Root:
 ```
 
 ### Examples & Skills (3 files)
+
 ```
 ├── examples/basic_usage.py
 ├── skills/extract-claims
@@ -163,14 +172,14 @@ Root:
 
 ## Import Clarity Matrix
 
-| Context | Import Statement | Notes |
-|---------|------------------|-------|
-| **Local Development** | `from src import ClaimificationPipeline` | Always use this |
-| **After pip install** | `from src import ClaimificationPipeline` | Module name doesn't change |
-| **Command line (after pip)** | `claimification --help` | Package name for CLI |
-| **Direct execution** | `python -m src.main` | Module path |
-| **Tests** | `from src import ...` | Consistent with source |
-| **Examples** | `from src import ...` | Consistent with source |
+| Context                      | Import Statement                         | Notes                      |
+| ---------------------------- | ---------------------------------------- | -------------------------- |
+| **Local Development**        | `from src import ClaimificationPipeline` | Always use this            |
+| **After pip install**        | `from src import ClaimificationPipeline` | Module name doesn't change |
+| **Command line (after pip)** | `claimification --help`                  | Package name for CLI       |
+| **Direct execution**         | `python -m src.main`                     | Module path                |
+| **Tests**                    | `from src import ...`                    | Consistent with source     |
+| **Examples**                 | `from src import ...`                    | Consistent with source     |
 
 **Key Point:** Always use `from src import` regardless of installation method. The package name "claimification" is only for pip and CLI commands.
 
@@ -179,6 +188,7 @@ Root:
 ## All Iterations Summary
 
 ### Iteration 1: Initial Verification
+
 - ✅ Verified all 5 core requirements
 - ✅ Created VERIFICATION.md
 - ✅ Created marketplace-metadata.json
@@ -188,6 +198,7 @@ Root:
 - **Issue:** Empty `__init__.py` files, no tests
 
 ### Iteration 2: Quality Improvements
+
 - ✅ Fixed empty `__init__.py` files in stages and prompts
 - ✅ Added test_imports.py (5 tests)
 - ✅ Added test_models.py (12 tests)
@@ -195,6 +206,7 @@ Root:
 - **Issue:** Import inconsistency in documentation
 
 ### Iteration 3: Documentation Clarity (FINAL)
+
 - ✅ Fixed import examples in README.md
 - ✅ Fixed import examples in docs/USAGE.md (4 locations)
 - ✅ Added clarification in QUICKSTART.md
@@ -297,21 +309,25 @@ python -c "from src import ClaimificationPipeline"
 After 3 iterations of critical review and fixes:
 
 ### Issues Found Across All Iterations:
+
 1. Empty `__init__.py` files → **FIXED in Iteration 2**
 2. No test suite → **FIXED in Iteration 2**
 3. Import inconsistency in docs → **FIXED in Iteration 3**
 
 ### Current Status:
+
 **✅ 100% READY FOR TWODIGITS REGISTRY MARKETPLACE INTEGRATION**
 
 ### All Requirements Met:
+
 1. ✅ **Kein MCP Server nötig** - Pure Python with no MCP dependencies
 2. ✅ **LangChain Structured Output** - All agents use `.with_structured_output()` with Pydantic
-3. ✅ **Multi-Model Support** - OpenAI (GPT-4o, GPT-4, GPT-3.5) & Anthropic (Claude 3.5, Opus)
+3. ✅ **Multi-Model Support** - OpenAI (GPT-5-nano, GPT-4, GPT-3.5) & Anthropic (Claude 3.5, Opus)
 4. ✅ **Rich CLI Output** - Progress bars, colored output, markdown rendering
 5. ✅ **Marketplace-Ready** - Complete documentation, tests, metadata, and proper structure
 
 ### Quality Indicators:
+
 - ✅ Professional Python package with pyproject.toml
 - ✅ Comprehensive test suite (15+ tests across 2 files)
 - ✅ Semantic versioning with CHANGELOG
@@ -321,6 +337,7 @@ After 3 iterations of critical review and fixes:
 - ✅ No critical issues remaining
 
 ### Deployment Actions:
+
 ```bash
 # 1. Commit all changes
 git add .

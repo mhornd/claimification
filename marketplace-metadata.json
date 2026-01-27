@@ -1,7 +1,7 @@
 {
   "id": "claimification",
   "name": "Claimification",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Extract verifiable factual claims from LLM-generated answers using a multi-stage AI pipeline",
   "longDescription": "Claimification implements a sophisticated 4-stage pipeline based on research from Microsoft Research. It breaks down LLM-generated text into atomic, verifiable factual statements that can be independently fact-checked. The pipeline includes sentence splitting, verifiable content detection, ambiguity resolution, and atomic claim extraction.",
   "author": {

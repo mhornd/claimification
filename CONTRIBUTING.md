@@ -193,7 +193,7 @@ def test_pipeline_initialization():
     """Test that pipeline initializes correctly."""
     pipeline = ClaimificationPipeline()
     assert pipeline is not None
-    assert pipeline.model_name == "gpt-4o"
+    assert pipeline.model_name == "gpt-5-nano-2025-08-07"
 
 
 def test_claim_extraction_basic():
@@ -252,6 +252,7 @@ def function_name(param1: str, param2: int) -> bool:
 ### README Updates
 
 When adding features, update:
+
 - Main README.md with feature description
 - Usage examples in docs/USAGE.md
 - Installation instructions if new dependencies added
@@ -261,6 +262,7 @@ When adding features, update:
 ### Before Submitting
 
 1. **Create a Branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -271,6 +273,7 @@ When adding features, update:
    - Update documentation
 
 3. **Test Your Changes**
+
    ```bash
    pytest tests/
    black src/ tests/
@@ -297,6 +300,7 @@ Fixes #123
 ```
 
 **Types of commits:**
+
 - `Add feature:` - New functionality
 - `Fix:` - Bug fixes
 - `Update:` - Updates to existing features
@@ -308,6 +312,7 @@ Fixes #123
 ### Submit Pull Request
 
 1. **Push to Your Fork**
+
    ```bash
    git push origin feature/your-feature-name
    ```

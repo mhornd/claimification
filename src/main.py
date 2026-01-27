@@ -126,8 +126,8 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default=os.getenv("CLAIMIFICATION_MODEL", "gpt-4o"),
-        help="LLM model to use (default: gpt-4o)"
+        default=os.getenv("CLAIMIFICATION_MODEL", "gpt-5-nano-2025-08-07"),
+        help="LLM model to use (default: gpt-5-nano-2025-08-07)"
     )
     parser.add_argument(
         "--temperature",
