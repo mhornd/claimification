@@ -1,18 +1,15 @@
 {
   "name": "claimification",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Extract and verify factual claims from LLM-generated answers using a multi-stage pipeline",
   "author": {
-    "name": "TwoDigits",
-    "email": "info@twodigits.dev",
-    "url": "https://github.com/TwoDigits"
+    "name": "Marlo Horndasch",
+    "email": "private",
+    "url": "https://github.com/mhornd"
   },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TwoDigits/claimification"
-  },
-  "homepage": "https://github.com/TwoDigits/claimification#readme",
+  "repository": "https://github.com/mhornd/claimification",
+  "homepage": "https://github.com/mhornd/claimification#readme",
   "keywords": [
     "fact-checking",
     "claim-extraction",
@@ -21,33 +18,5 @@
     "langchain",
     "ai-safety"
   ],
-  "skills": [
-    "extract-claims"
-  ],
-  "requires": {
-    "python": ">=3.10",
-    "claude-code": ">=1.0.0"
-  },
-  "dependencies": {
-    "langchain": ">=0.1.0",
-    "langchain-openai": ">=0.0.5",
-    "langchain-anthropic": ">=0.1.0",
-    "pydantic": ">=2.0.0",
-    "python-dotenv": ">=1.0.0",
-    "rich": ">=13.0.0"
-  },
-  "setup": {
-    "install_command": "pip install -r requirements.txt",
-    "env_required": [
-      "OPENAI_API_KEY or ANTHROPIC_API_KEY"
-    ],
-    "env_example": ".env.example"
-  },
-  "tags": [
-    "fact-checking",
-    "enterprise",
-    "ai-safety",
-    "verification"
-  ],
-  "category": "development-tools"
+  "skills": ["extract-claims"]
 }
