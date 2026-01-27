@@ -1,17 +1,17 @@
 ---
 name: extract-claims
-description: Extract verifiable factual claims from a question-answer pair using the Claimification pipeline
+description: Extract verifiable factual claims from any text using the Claimification pipeline
 ---
 
 # Extract Claims Skill
 
-Use this skill to extract factual claims from LLM-generated answers using the Claimification multi-stage pipeline.
+Use this skill to extract factual claims from text using the Claimification multi-stage pipeline.
 
 ## What This Does
 
-Claimification processes question-answer pairs through four stages:
+Claimification processes text through four stages:
 
-1. **Sentence Splitting:** Breaks the answer into sentences with context
+1. **Sentence Splitting:** Breaks the text into sentences with context
 2. **Selection:** Identifies sentences with verifiable content
 3. **Disambiguation:** Resolves ambiguous references using context
 4. **Decomposition:** Extracts atomic, standalone factual claims
@@ -20,28 +20,24 @@ Claimification processes question-answer pairs through four stages:
 
 Use this skill when you need to:
 
-- Verify LLM outputs for factual accuracy
+- Verify text for factual accuracy
 - Extract structured claims for fact-checking
-- Identify which parts of an answer are verifiable
-- Break down complex answers into atomic statements
+- Identify which parts of a text are verifiable
+- Break down complex statements into atomic claims
 
 ## Usage
 
 ```
-/extract-claims
+/extract-claims [text]
 ```
 
-Claude will ask you for:
-
-1. The **question** that prompted the answer
-2. The **answer** text to analyze
+You can provide the text directly as an argument, or Claude will ask you for it.
 
 ## Example
 
 **Input:**
 
-- Question: "What are the economic challenges in Argentina?"
-- Answer: "Argentina's rampant inflation, with monthly rates reaching as high as 25.5%, has made many goods unobtainable and plunged the value of the currency, causing severe economic hardship."
+Text: "Argentina's rampant inflation, with monthly rates reaching as high as 25.5%, has made many goods unobtainable and plunged the value of the currency, causing severe economic hardship."
 
 **Output:**
 
@@ -57,7 +53,7 @@ A. Argentina's rampant inflation, with monthly rates reaching as high as 25.5%, 
 
 ## Output Format
 
-For each sentence in the answer:
+For each sentence in the text:
 
 - **Source Sentence:** The original sentence
 - **Status:**
@@ -98,8 +94,8 @@ Claimification follows these principles:
 ## Limitations
 
 - Requires OpenAI or Anthropic API access
-- Processing time depends on answer length
-- Best suited for factual, informative answers (not creative or conversational text)
+- Processing time depends on text length
+- Best suited for factual, informative text (not creative or conversational content)
 - May require manual review for domain-specific terminology
 
 ## Technical Details
