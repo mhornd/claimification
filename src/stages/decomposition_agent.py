@@ -6,7 +6,7 @@ This agent decomposes sentences into atomic, standalone factual claims.
 from typing import Optional
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 
 from ..models import DecompositionResult, StageResult
 from ..prompts.decomposition import (
@@ -40,11 +40,27 @@ class DecompositionAgent:
 
         # Initialize LLM based on model name
         if "gpt" in model or "openai" in model:
-            self.llm = ChatOpenAI(
-                model=model,
-                temperature=temperature,
-                max_tokens=max_tokens
-            )
+            # Use max_completion_tokens for newer models (gpt-5-nano, gpt-4o, etc.)
+            # For reasoning models, set reasoning_effort to "low" to minimize token usage
+            if "gpt-5" in model or "gpt-4o" in model:
+                model_kwargs = {
+                    "max_completion_tokens": max_tokens,
+                }
+                # Add reasoning_effort for reasoning models
+                if "gpt-5" in model or "o1" in model:
+                    model_kwargs["reasoning_effort"] = "low"
+
+                self.llm = ChatOpenAI(
+                    model=model,
+                    temperature=temperature,
+                    model_kwargs=model_kwargs
+                )
+            else:
+                self.llm = ChatOpenAI(
+                    model=model,
+                    temperature=temperature,
+                    max_tokens=max_tokens
+                )
         elif "claude" in model or "anthropic" in model:
             self.llm = ChatAnthropic(
                 model=model,

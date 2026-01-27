@@ -1,6 +1,6 @@
 {
   "name": "claimification",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Extract and verify factual claims from any text",
   "author": {
     "name": "Marlo Horndasch",
