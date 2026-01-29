@@ -1,22 +1,43 @@
 # Claimification
 
-> **Extract verifiable factual claims from LLM-generated answers using a multi-stage AI pipeline**
+> **Extract verifiable factual claims and map entity relationships from text using multi-stage AI pipelines**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![LangChain](https://img.shields.io/badge/LangChain-Enabled-green.svg)](https://langchain.com/)
 
-Claimification is a Claude Code plugin that implements a sophisticated claim extraction pipeline based on the research paper **"Towards Effective Extraction and Evaluation of Factual Claims"** by Metropolitansky & Larson (2025). It breaks down LLM-generated text into atomic, verifiable factual statements that can be independently fact-checked.
+Claimification is a Claude Code plugin providing two powerful text analysis features:
+1. **Claim Extraction** - Extract verifiable factual claims using a 4-stage pipeline
+2. **Entity Relationship Mapping** - Extract entities and relationships to build knowledge graphs
 
-## Why Claimification?
+## Features
 
-Large language models can produce impressive outputs, but they sometimes include inaccuracies or unsubstantiated claims. Claimification helps by:
+### 1. Claim Extraction
+
+Extract verifiable factual claims from LLM outputs using a sophisticated 4-stage pipeline based on research from Microsoft Research.
 
 ✅ **Extracting verifiable facts** from complex LLM outputs
 ✅ **Filtering out opinions** and non-verifiable content
 ✅ **Resolving ambiguities** using contextual information
 ✅ **Creating standalone claims** that preserve critical context
 ✅ **Flagging unresolvable ambiguities** instead of guessing
+
+### 2. Entity Relationship Mapping
+
+Transform unstructured text into queryable knowledge graphs by extracting entities and their relationships.
+
+📊 **Structure Chaos** - Convert LLM outputs into queryable knowledge structures
+🔗 **Discover Connections** - Find both explicit and implicit relationships
+🎯 **Multiple Formats** - Export as JSON or natural language summaries
+🤖 **LLM-Powered Inference** - Infer implicit relationships with confidence scores
+
+## Dual MCP Servers
+
+Claimification exposes both features through separate MCP servers:
+- **claim-extraction** - Extract verifiable claims
+- **entity-mapping** - Map entity relationships
+
+Both can be used independently or together for comprehensive text analysis.
 
 ## Quick Start
 
@@ -49,8 +70,11 @@ cp .env.example .env
 # Install the plugin in Claude Code
 /plugin install claimification
 
-# Use the skill
+# Use claim extraction
 /extract-claims
+
+# Use entity mapping
+# (Available through MCP tool: extract_entities_and_relationships)
 ```
 
 ### Using Programmatically
@@ -188,10 +212,17 @@ CLAIMIFICATION_TIMEOUT_SECONDS=30
 
 ## Documentation
 
+### Claim Extraction
 - [Installation Guide](docs/INSTALLATION.md) - Detailed setup instructions
-- [Usage Guide](docs/USAGE.md) - How to use Claimification
+- [Usage Guide](docs/USAGE.md) - How to use claim extraction
 - [API Reference](docs/API.md) - Programmatic API documentation
 - [Core Principles](docs/PRINCIPLES.md) - Explanation of claim extraction principles
+
+### Entity Relationship Mapping
+- [Usage Guide](docs/entity_mapping/USAGE.md) - How to use entity mapping
+- [API Reference](docs/entity_mapping/API.md) - Entity mapping API documentation
+
+### General
 - [Project Structure](PROJECT_STRUCTURE.md) - Architecture and design decisions
 
 ## Use Cases
