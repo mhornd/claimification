@@ -27,7 +27,7 @@ The **Entity Relationship Mapper** is a new feature for the Claimification plugi
 - **Optional**: Contextual information (e.g., original question that prompted the text)
 
 ### Output Formats
-1. **Knowledge Graph (JSON/NetworkX)**: Structured graph with nodes (entities) and edges (relationships)
+1. **Knowledge Graph (JSON)**: Structured graph with nodes (entities) and edges (relationships)
 2. **Natural Language Summary**: Human-readable text description of entities and relationships
 
 ### Example
@@ -177,9 +177,6 @@ class KnowledgeGraph(BaseModel):
     relationships: List[Relationship]
     metadata: GraphMetadata
 
-    def to_networkx(self) -> nx.DiGraph:
-        """Convert to NetworkX graph for programmatic analysis"""
-
     def to_summary(self) -> str:
         """Generate natural language summary"""
 
@@ -220,7 +217,7 @@ claimification/
 │       │   └── relationship_inference.py
 │       └── utils/
 │           ├── __init__.py
-│           └── graph_utils.py     # NetworkX helpers, visualization
+│           └── graph_utils.py     # Graph utilities, helpers
 │
 ├── mcp_servers/                   # NEW: Multiple MCP servers
 │   ├── claim_extraction_server.py # Moved from root mcp_server.py
@@ -370,9 +367,7 @@ Rules:
 1. Implement `Entity`, `EntityType`, `Relationship` models
 2. Implement `KnowledgeGraph` with export methods:
    - `to_json()`
-   - `to_networkx()`
    - `to_summary()`
-3. Add NetworkX integration for graph analysis
 
 ### Phase 3: Stage 1 - Entity Extraction
 1. Design and iterate on prompt
@@ -424,10 +419,10 @@ Rules:
 - **Iterate First**: Build both pipelines, then extract commonalities
 - **Simplicity**: Less cognitive overhead during initial development
 
-### Why NetworkX + JSON?
-- **NetworkX**: Industry-standard graph library, enables graph algorithms
+### Why JSON?
 - **JSON**: Universal format, easy integration with other tools
-- **Both**: NetworkX for analysis, JSON for storage/transfer
+- **Structured**: Enables programmatic access to entities and relationships
+- **Simple**: No additional dependencies, works everywhere
 
 ## Success Criteria
 
@@ -437,7 +432,7 @@ A successful implementation will:
 2. ✅ Resolve coreferences correctly (pronouns → canonical names)
 3. ✅ Extract explicit relationships with textual evidence
 4. ✅ Infer implicit relationships with confidence scores
-5. ✅ Export valid NetworkX graphs
+5. ✅ Export valid JSON representations
 6. ✅ Generate readable natural language summaries
 7. ✅ Function as independent MCP server alongside claim-extraction
 
@@ -453,7 +448,6 @@ A successful implementation will:
 ## References
 
 - Claimification claim extraction pipeline (existing architecture)
-- NetworkX documentation: https://networkx.org/
 - LangChain structured output: https://python.langchain.com/docs/modules/model_io/output_parsers/
 
 ---

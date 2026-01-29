@@ -1,7 +1,7 @@
 {
   "name": "claimification",
-  "version": "1.1.1",
-  "description": "Extract and verify factual claims from any text",
+  "version": "2.0.0",
+  "description": "Extract claims and map entity relationships from any text",
   "author": {
     "name": "Marlo Horndasch",
     "email": "private",
@@ -16,12 +16,23 @@
     "verification",
     "llm",
     "langchain",
-    "ai-safety"
+    "ai-safety",
+    "entity-extraction",
+    "knowledge-graph",
+    "relationship-mapping"
   ],
   "mcpServers": {
     "claim-extraction": {
       "command": "python",
-      "args": ["mcp_server.py"],
+      "args": ["mcp_servers/claim_extraction_server.py"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+      }
+    },
+    "entity-mapping": {
+      "command": "python",
+      "args": ["mcp_servers/entity_mapping_server.py"],
       "env": {
         "OPENAI_API_KEY": "${OPENAI_API_KEY}",
         "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"

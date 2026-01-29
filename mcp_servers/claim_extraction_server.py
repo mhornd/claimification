@@ -12,8 +12,8 @@ from mcp.server import Server
 from mcp.types import Tool, TextContent
 
 # Claimification imports
-from src.pipeline import ClaimificationPipeline
-from src.models import PipelineResult
+from src.claim_extraction.pipeline import ClaimificationPipeline
+from src.claim_extraction.models import PipelineResult
 
 
 # Initialize server

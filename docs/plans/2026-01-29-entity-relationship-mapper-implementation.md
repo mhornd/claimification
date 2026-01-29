@@ -2,11 +2,11 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Build a 3-stage pipeline that extracts entities and relationships from unstructured text, outputting both structured knowledge graphs (JSON/NetworkX) and natural language summaries.
+**Goal:** Build a 3-stage pipeline that extracts entities and relationships from unstructured text, outputting both structured knowledge graphs (JSON) and natural language summaries.
 
 **Architecture:** Multi-stage LangChain pipeline (Entity Extraction → Explicit Relationships → Inferred Relationships), following proven Claimification pattern. Separate MCP server for entity mapping alongside existing claim extraction.
 
-**Tech Stack:** Python 3.10+, LangChain, Pydantic, NetworkX, OpenAI/Anthropic APIs, MCP SDK
+**Tech Stack:** Python 3.10+, LangChain, Pydantic, OpenAI/Anthropic APIs, MCP SDK
 
 ---
 
@@ -313,23 +313,13 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 
 ## Task 4: Data Models - Knowledge Graph
 
-**Goal:** Create KnowledgeGraph model with export methods (JSON, NetworkX, summary)
+**Goal:** Create KnowledgeGraph model with export methods (JSON, summary)
 
 **Files:**
 - Create: `src/entity_mapping/models/knowledge_graph.py`
 - Modify: `src/entity_mapping/models/__init__.py`
-- Modify: `requirements.txt` (add NetworkX)
 
-### Step 1: Add NetworkX dependency
-
-File: `requirements.txt`
-
-Add after line 5 (after pydantic):
-```
-networkx>=3.0
-```
-
-### Step 2: Implement KnowledgeGraph model
+### Step 1: Implement KnowledgeGraph model
 
 File: `src/entity_mapping/models/knowledge_graph.py`
 
@@ -339,7 +329,6 @@ File: `src/entity_mapping/models/knowledge_graph.py`
 from typing import List, Dict, Any
 from datetime import datetime
 from pydantic import BaseModel, Field
-import networkx as nx
 
 from src.entity_mapping.models.entity import Entity
 from src.entity_mapping.models.relationship import Relationship
@@ -383,7 +372,7 @@ class KnowledgeGraph(BaseModel):
     """Represents a complete knowledge graph extracted from text.
 
     Contains entities, relationships, and methods to export in
-    various formats (JSON, NetworkX, natural language summary).
+    various formats (JSON, natural language summary).
     """
 
     entities: List[Entity] = Field(
@@ -412,40 +401,6 @@ class KnowledgeGraph(BaseModel):
             "relationships": [rel.model_dump() for rel in self.relationships],
             "metadata": self.metadata.model_dump()
         }
-
-    def to_networkx(self) -> nx.DiGraph:
-        """Convert to NetworkX directed graph.
-
-        Nodes represent entities with attributes (text, type).
-        Edges represent relationships with attributes (type, evidence, confidence).
-
-        Returns:
-            NetworkX DiGraph instance
-        """
-        G = nx.DiGraph()
-
-        # Add nodes (entities)
-        for entity in self.entities:
-            G.add_node(
-                entity.id,
-                text=entity.text,
-                type=entity.type,
-                mentions=entity.mentions
-            )
-
-        # Add edges (relationships)
-        for rel in self.relationships:
-            G.add_edge(
-                rel.source_entity_id,
-                rel.target_entity_id,
-                relationship_type=rel.relationship_type,
-                evidence=rel.evidence,
-                is_inferred=rel.is_inferred,
-                confidence=rel.confidence,
-                reasoning=rel.reasoning
-            )
-
-        return G
 
     def to_summary(self) -> str:
         """Generate natural language summary of the knowledge graph.
@@ -510,7 +465,7 @@ class KnowledgeGraph(BaseModel):
         return entity_id  # Fallback
 ```
 
-### Step 3: Update __init__.py
+### Step 2: Update __init__.py
 
 File: `src/entity_mapping/models/__init__.py`
 
@@ -533,23 +488,15 @@ __all__ = [
 ]
 ```
 
-### Step 4: Install NetworkX dependency
+### Step 3: Commit knowledge graph model
 
 ```bash
-pip install networkx>=3.0
-```
-
-### Step 5: Commit knowledge graph model
-
-```bash
-git add src/entity_mapping/models/knowledge_graph.py src/entity_mapping/models/__init__.py requirements.txt
+git add src/entity_mapping/models/knowledge_graph.py src/entity_mapping/models/__init__.py
 git commit -m "feat: add KnowledgeGraph model with export methods
 
 - Create KnowledgeGraph and GraphMetadata models
 - Implement to_json() for JSON export
-- Implement to_networkx() for NetworkX graph conversion
 - Implement to_summary() for natural language summaries
-- Add networkx dependency
 
 Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 ```
@@ -1865,7 +1812,7 @@ Transform unstructured text into queryable knowledge graphs by extracting entiti
 
 📊 **Structure Chaos** - Convert LLM outputs into queryable knowledge structures
 🔗 **Discover Connections** - Find both explicit and implicit relationships
-🎯 **Multiple Formats** - Export as JSON, NetworkX graphs, or natural language summaries
+🎯 **Multiple Formats** - Export as JSON or natural language summaries
 🤖 **LLM-Powered Inference** - Infer implicit relationships with confidence scores
 
 ## Dual MCP Servers
@@ -1966,7 +1913,6 @@ knowledge_graph = pipeline.extract_knowledge_graph(
 # Access results
 print(knowledge_graph.to_summary())  # Natural language
 graph_json = knowledge_graph.to_json()  # JSON export
-nx_graph = knowledge_graph.to_networkx()  # NetworkX graph
 ```
 
 ## Pipeline Stages
@@ -2082,18 +2028,6 @@ Inferred relationships (0):
 json_data = knowledge_graph.to_json()
 ```
 
-### NetworkX Graph
-
-```python
-import networkx as nx
-
-G = knowledge_graph.to_networkx()
-
-# Analyze graph
-nx.shortest_path(G, "e1", "e3")
-centrality = nx.betweenness_centrality(G)
-```
-
 ## Best Practices
 
 1. **Provide Context**: Use the `context` parameter for better disambiguation
@@ -2191,7 +2125,6 @@ class KnowledgeGraph(BaseModel):
     metadata: GraphMetadata
 
     def to_json() -> Dict[str, Any]
-    def to_networkx() -> nx.DiGraph
     def to_summary() -> str
 ```
 
