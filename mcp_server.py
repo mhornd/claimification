@@ -17,7 +17,7 @@ from src.models import PipelineResult
 
 
 # Initialize server
-server = Server("claimification")
+server = Server("claim-extraction")
 
 
 def format_result_as_markdown(result: PipelineResult) -> str:
