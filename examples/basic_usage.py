@@ -1,6 +1,6 @@
 """Basic usage example for Claimification."""
 
-from src import ClaimificationPipeline, SentenceStatus
+from src import ClaimExtractionPipeline, SentenceStatus
 import os
 from pathlib import Path
 import sys
@@ -21,7 +21,7 @@ Climate change has played a pivotal role in creating food insecurity and economi
 
     # Initialize pipeline
     # Make sure OPENAI_API_KEY or ANTHROPIC_API_KEY is set in environment
-    pipeline = ClaimificationPipeline(
+    pipeline = ClaimExtractionPipeline(
         model=os.getenv("CLAIMIFICATION_MODEL", "gpt-5-nano-2025-08-07"),
         temperature=0.0,
         context_sentences=2,

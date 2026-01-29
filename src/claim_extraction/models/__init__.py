@@ -1,4 +1,4 @@
-"""Data models for the Claimification pipeline."""
+"""Data models for the claim extraction pipeline."""
 
 from .sentence import SentenceWithContext, SentenceMetadata
 from .claim import Claim, ClaimExtractionResult, PipelineResult, SentenceStatus

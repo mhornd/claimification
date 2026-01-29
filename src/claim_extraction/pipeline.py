@@ -1,4 +1,4 @@
-"""Claimification Pipeline - Orchestrates all stages."""
+"""Claim Extraction Pipeline - Orchestrates all stages."""
 
 import time
 from typing import Optional
@@ -21,7 +21,7 @@ from .stages.disambiguation_agent import DisambiguationAgent
 from .stages.decomposition_agent import DecompositionAgent
 
 
-class ClaimificationPipeline:
+class ClaimExtractionPipeline:
     """Main pipeline for extracting factual claims from text."""
 
     def __init__(
@@ -31,7 +31,7 @@ class ClaimificationPipeline:
         context_sentences: int = 2,
         verbose: bool = True
     ):
-        """Initialize the Claimification pipeline.
+        """Initialize the claim extraction pipeline.
 
         Args:
             model: LLM model to use for agents
@@ -68,7 +68,7 @@ class ClaimificationPipeline:
 
         if self.verbose:
             self.console.print(
-                "\n[bold cyan]Starting Claimification Pipeline[/bold cyan]")
+                "\n[bold cyan]Starting Claim Extraction Pipeline[/bold cyan]")
             if question:
                 self.console.print(f"Question: {question[:100]}...")
             self.console.print(f"Text length: {len(text)} characters\n")

@@ -56,10 +56,10 @@ cp .env.example .env
 ### Using Programmatically
 
 ```python
-from src import ClaimificationPipeline
+from src import ClaimExtractionPipeline
 
 # Initialize pipeline
-pipeline = ClaimificationPipeline(
+pipeline = ClaimExtractionPipeline(
     model="gpt-5-nano-2025-08-07",
     temperature=0.0
 )

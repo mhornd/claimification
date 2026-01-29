@@ -1,4 +1,4 @@
-"""Claimification - Extract verifiable factual claims and map entity relationships.
+"""Claimification Plugin - Extract verifiable factual claims and map entity relationships.
 
 This package provides:
 1. Claim Extraction - Multi-stage pipeline for extracting verifiable factual claims
@@ -6,7 +6,7 @@ This package provides:
 """
 
 from src.claim_extraction import (
-    ClaimificationPipeline,
+    ClaimExtractionPipeline,
     Claim,
     PipelineResult,
     ClaimExtractionResult,
@@ -17,7 +17,7 @@ __version__ = "2.0.0"
 __author__ = "TwoDigits"
 
 __all__ = [
-    "ClaimificationPipeline",
+    "ClaimExtractionPipeline",
     "Claim",
     "PipelineResult",
     "ClaimExtractionResult",

@@ -1,4 +1,4 @@
-"""Claim data models for Claimification pipeline."""
+"""Claim data models for claim extraction pipeline."""
 
 from dataclasses import dataclass, field
 from typing import Literal, List, Dict, Any, Optional
@@ -60,7 +60,7 @@ class ClaimExtractionResult:
 
 @dataclass
 class PipelineResult:
-    """Complete result from the Claimification pipeline.
+    """Complete result from the claim extraction pipeline.
 
     Attributes:
         text: The original text

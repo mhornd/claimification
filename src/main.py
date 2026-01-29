@@ -1,4 +1,4 @@
-"""Main entry point for Claimification."""
+"""Main CLI entry point for Claimification plugin."""
 
 import os
 import json
@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from rich.console import Console
 from rich.markdown import Markdown
 
-from src.claim_extraction.pipeline import ClaimificationPipeline
+from src.claim_extraction.pipeline import ClaimExtractionPipeline
 from src.claim_extraction.models import PipelineResult, SentenceStatus
 
 
@@ -170,7 +170,7 @@ def main():
         parser.error("Either --text or --text-file must be provided")
 
     # Initialize pipeline
-    pipeline = ClaimificationPipeline(
+    pipeline = ClaimExtractionPipeline(
         model=args.model,
         temperature=args.temperature,
         context_sentences=args.context_sentences,

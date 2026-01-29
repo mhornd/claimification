@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Claimification MCP Server - STDIO-based integration for Claude Code."""
+"""Claim Extraction MCP Server - STDIO-based integration for Claude Code."""
 
 import os
 import sys
@@ -11,8 +11,8 @@ from typing import Any
 from mcp.server import Server
 from mcp.types import Tool, TextContent
 
-# Claimification imports
-from src.claim_extraction.pipeline import ClaimificationPipeline
+# Claim Extraction imports
+from src.claim_extraction.pipeline import ClaimExtractionPipeline
 from src.claim_extraction.models import PipelineResult
 
 
@@ -32,7 +32,7 @@ def format_result_as_markdown(result: PipelineResult) -> str:
     stats = result.get_statistics_summary()
     claims = result.get_all_claims()
 
-    output_lines = ["# Claimification Results\n"]
+    output_lines = ["# Claim Extraction Results\n"]
 
     # Statistics summary
     output_lines.append("## Summary")
@@ -158,7 +158,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
         validate_input(text)
 
         # Initialize pipeline (with verbose=False for MCP)
-        pipeline = ClaimificationPipeline(
+        pipeline = ClaimExtractionPipeline(
             model=model,
             temperature=0.0,
             verbose=False  # No console output in MCP mode
@@ -182,7 +182,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
 
     except Exception as e:
         # Return error as formatted text
-        error_output = f"""# Claimification Error
+        error_output = f"""# Claim Extraction Error
 
 **Error:** {str(e)}
 

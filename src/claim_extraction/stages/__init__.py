@@ -1,4 +1,4 @@
-"""Pipeline stages for Claimification."""
+"""Pipeline stages for claim extraction."""
 
 from .sentence_splitter import SentenceSplitter
 from .selection_agent import SelectionAgent

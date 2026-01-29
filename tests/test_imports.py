@@ -5,9 +5,9 @@ import pytest
 
 def test_import_main_package():
     """Test that main package imports successfully."""
-    from src import ClaimificationPipeline, Claim, ClaimExtractionResult, PipelineResult, SentenceStatus
+    from src import ClaimExtractionPipeline, Claim, ClaimExtractionResult, PipelineResult, SentenceStatus
 
-    assert ClaimificationPipeline is not None
+    assert ClaimExtractionPipeline is not None
     assert Claim is not None
     assert ClaimExtractionResult is not None
     assert PipelineResult is not None
@@ -16,7 +16,7 @@ def test_import_main_package():
 
 def test_import_models():
     """Test that all models can be imported."""
-    from src.models import (
+    from src.claim_extraction.models import (
         SentenceWithContext,
         SentenceMetadata,
         Claim,
@@ -41,7 +41,7 @@ def test_import_models():
 
 def test_import_stages():
     """Test that all stages can be imported."""
-    from src.stages import (
+    from src.claim_extraction.stages import (
         SentenceSplitter,
         SelectionAgent,
         DisambiguationAgent,
@@ -56,7 +56,7 @@ def test_import_stages():
 
 def test_import_prompts():
     """Test that all prompts can be imported."""
-    from src.prompts import (
+    from src.claim_extraction.prompts import (
         SELECTION_SYSTEM_PROMPT,
         create_selection_prompt,
         DISAMBIGUATION_SYSTEM_PROMPT,
@@ -75,8 +75,8 @@ def test_import_prompts():
 
 def test_pipeline_instantiation():
     """Test that pipeline can be instantiated."""
-    from src import ClaimificationPipeline
+    from src import ClaimExtractionPipeline
 
     # Should not raise any import errors
-    pipeline = ClaimificationPipeline.__init__.__code__
+    pipeline = ClaimExtractionPipeline.__init__.__code__
     assert pipeline is not None

@@ -1,4 +1,4 @@
-"""Sentence data models for Claimification pipeline."""
+"""Sentence data models for claim extraction pipeline."""
 
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional
