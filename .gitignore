@@ -61,4 +61,4 @@ temp/
 
 # Claude
 .docs/
-
+.mcp-servers.old/
