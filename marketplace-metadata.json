@@ -1,9 +1,9 @@
 {
   "id": "claimification",
   "name": "Claimification",
-  "version": "2.2.0",
-  "description": "Extract and verify factual claims from any text",
-  "longDescription": "Claimification implements a sophisticated 4-stage pipeline based on research from Microsoft Research. It breaks down text into atomic, verifiable factual statements that can be independently fact-checked. The pipeline includes sentence splitting, verifiable content detection, ambiguity resolution, and atomic claim extraction.",
+  "version": "2.2.1",
+  "description": "Extract claims, analyze meetings, verify facts, and map knowledge with AI-powered extraction skills",
+  "longDescription": "Claimification provides comprehensive text analysis through three complementary systems: (1) Claim Extraction - a 4-stage pipeline that breaks text into atomic, verifiable facts; (2) Entity Relationship Mapping - builds knowledge graphs from unstructured text; (3) Specialized Skills & Agent - 8 extraction skills for analyzing meetings, communications, and documents, plus a meeting intelligence agent that systematically transforms notes into structured minutes.",
   "author": {
     "name": "Marlo Horndasch",
     "email": "private",
@@ -25,7 +25,14 @@
     "llm",
     "langchain",
     "ai-safety",
-    "enterprise"
+    "enterprise",
+    "meeting-analysis",
+    "knowledge-graphs",
+    "entity-mapping",
+    "commitment-tracking",
+    "action-items",
+    "decision-tracking",
+    "risk-detection"
   ],
   "keywords": [
     "fact-checking",
@@ -34,23 +41,39 @@
     "LLM safety",
     "groundedness detection",
     "factual claims",
-    "AI safety"
+    "AI safety",
+    "meeting intelligence",
+    "meeting minutes",
+    "action item extraction",
+    "commitment tracking",
+    "decision documentation",
+    "risk detection",
+    "entity extraction",
+    "relationship mapping",
+    "knowledge graphs",
+    "contradiction detection",
+    "evidence validation",
+    "audience adaptation"
   ],
   "features": [
     "4-stage claim extraction pipeline",
+    "Entity relationship mapping with knowledge graphs",
+    "8 specialized extraction skills (commitments, actions, decisions, risks, evidence, contradictions, uncertainty, audience)",
+    "Meeting intelligence agent for systematic note processing",
     "LangChain with structured output",
     "Multi-model support (OpenAI & Anthropic)",
     "Type-safe Pydantic models",
-    "MCP Server for seamless Claude Code integration",
+    "2 MCP Servers for seamless Claude Code integration",
     "Python API and CLI interface",
     "STDIO-based MCP transport (no network setup)"
   ],
   "useCases": [
-    "AI Safety & Verification",
-    "Fact-checking LLM outputs",
-    "Research & Analysis",
-    "Enterprise Compliance",
-    "Groundedness detection integration"
+    "AI Safety & Verification - Fact-check LLM outputs and detect contradictions",
+    "Meeting & Communication Management - Transform notes into actionable minutes",
+    "Legal & Compliance - Identify risks and validate claims in contracts",
+    "Research & Analysis - Build knowledge graphs and extract structured claims",
+    "Enterprise Workflows - Track commitments, actions, and decisions automatically",
+    "Content Quality Assurance - Validate evidence and adapt for different audiences"
   ],
   "requires": {
     "python": ">=3.10",
@@ -87,7 +110,7 @@
   "screenshots": [],
   "featured": true,
   "verified": true,
-  "lastUpdated": "2026-01-27",
+  "lastUpdated": "2026-01-30",
   "compatibility": {
     "platforms": ["macOS", "Linux", "Windows"],
     "pythonVersions": ["3.10", "3.11", "3.12"]
@@ -95,6 +118,69 @@
   "support": {
     "email": "private"
   },
+  "skills": {
+    "coreExtraction": [
+      {
+        "name": "commitment-extractor",
+        "command": "/commitment-extractor",
+        "description": "Extract promises, commitments, and deadlines from emails, meetings, and contracts"
+      },
+      {
+        "name": "action-item-extractor",
+        "command": "/action-item-extractor",
+        "description": "Pull concrete to-dos from meetings and documents with owners and timelines"
+      },
+      {
+        "name": "decision-extractor",
+        "command": "/decision-extractor",
+        "description": "Extract decisions and their rationale from discussions and meetings"
+      }
+    ],
+    "qualityRisk": [
+      {
+        "name": "risk-liability-detector",
+        "command": "/risk-liability-detector",
+        "description": "Identify legal risks, overpromises, and missing disclaimers"
+      },
+      {
+        "name": "evidence-validator",
+        "command": "/evidence-validator",
+        "description": "Validate factual claims with rigorous internet research"
+      },
+      {
+        "name": "contradiction-detector",
+        "command": "/contradiction-detector",
+        "description": "Find contradictory statements within documents"
+      },
+      {
+        "name": "uncertainty-quantification",
+        "command": "/uncertainty-quantification",
+        "description": "Quantify uncertainty and confidence levels in text"
+      }
+    ],
+    "contentAdaptation": [
+      {
+        "name": "audience-adapter",
+        "command": "/audience-adapter",
+        "description": "Transform text for specific target audiences and expertise levels"
+      }
+    ]
+  },
+  "agents": [
+    {
+      "name": "meeting-intelligence",
+      "command": "/meeting-intelligence",
+      "description": "Systematically transform meeting notes into structured minutes by applying all extraction skills",
+      "capabilities": [
+        "Extract decisions via decision-extractor",
+        "Identify action items via action-item-extractor",
+        "Track commitments via commitment-extractor",
+        "Detect contradictions via contradiction-detector",
+        "Flag risks via risk-liability-detector",
+        "Produce concise, actionable meeting minutes"
+      ]
+    }
+  ],
   "research": {
     "paperTitle": "Towards Effective Extraction and Evaluation of Factual Claims",
     "paperAuthors": "Metropolitansky & Larson (2025)",

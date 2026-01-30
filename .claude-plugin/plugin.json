@@ -1,7 +1,7 @@
 {
   "name": "claimification",
-  "version": "2.2.0",
-  "description": "Extract claims and map entity relationships from any text",
+  "version": "2.2.1",
+  "description": "Extract claims, map entities, analyze meetings, and verify factual content with specialized AI skills",
   "author": {
     "name": "Marlo Horndasch",
     "email": "private",

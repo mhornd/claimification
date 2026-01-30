@@ -102,8 +102,8 @@ cp .env.example .env
 /plugin install claimification
 
 # Use MCP tools
-/extract-claims                    # Extract verifiable claims
-# extract_entities_and_relationships  # Map entity relationships (MCP tool)
+/extract-claims                    # Extract verifiable claims (MCP tool)
+/entity-relationship-mapper  # Map entity relationships (MCP tool)
 
 # Use extraction skills
 /commitment-extractor                # Track promises and commitments
@@ -114,7 +114,7 @@ cp .env.example .env
 /contradiction-detector           # Find contradictions
 
 # Use the meeting intelligence agent
-/meeting-intelligence             # Transform meeting notes into structured minutes
+/meeting-intelligence             # Transform meeting notes/transcript into structured minutes
 ```
 
 ### Using Programmatically
