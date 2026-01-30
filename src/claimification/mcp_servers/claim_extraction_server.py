@@ -11,8 +11,14 @@ from pathlib import Path
 # Load environment variables from .env file
 from dotenv import load_dotenv
 
-# Get the project root directory (parent of mcp_servers)
-project_root = Path(__file__).parent.parent
+# Get the project root directory (3 levels up: mcp_servers -> claimification -> src -> root)
+project_root = Path(__file__).parent.parent.parent.parent
+src_dir = project_root / "src"
+
+# Add src directory to Python path for module imports
+if src_dir.exists() and str(src_dir) not in sys.path:
+    sys.path.insert(0, str(src_dir))
+
 env_path = project_root / ".env"
 
 # Load .env file if it exists
