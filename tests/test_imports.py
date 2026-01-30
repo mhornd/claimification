@@ -16,7 +16,7 @@ def test_import_main_package():
 
 def test_import_models():
     """Test that all models can be imported."""
-    from src.claim_extraction.models import (
+    from claimification.claim_extraction.models import (
         SentenceWithContext,
         SentenceMetadata,
         Claim,
@@ -41,7 +41,7 @@ def test_import_models():
 
 def test_import_stages():
     """Test that all stages can be imported."""
-    from src.claim_extraction.stages import (
+    from claimification.claim_extraction.stages import (
         SentenceSplitter,
         SelectionAgent,
         DisambiguationAgent,
@@ -56,7 +56,7 @@ def test_import_stages():
 
 def test_import_prompts():
     """Test that all prompts can be imported."""
-    from src.claim_extraction.prompts import (
+    from claimification.claim_extraction.prompts import (
         SELECTION_SYSTEM_PROMPT,
         create_selection_prompt,
         DISAMBIGUATION_SYSTEM_PROMPT,

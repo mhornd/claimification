@@ -5,11 +5,11 @@ from typing import List
 from pydantic import BaseModel
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 
-from src.entity_mapping.models.entity import Entity
-from src.entity_mapping.models.relationship import Relationship
-from src.entity_mapping.prompts.relationship_extraction import (
+from claimification.entity_mapping.models.entity import Entity
+from claimification.entity_mapping.models.relationship import Relationship
+from claimification.entity_mapping.prompts.relationship_extraction import (
     build_relationship_extraction_prompt
 )
 

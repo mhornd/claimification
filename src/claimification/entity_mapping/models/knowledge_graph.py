@@ -4,8 +4,8 @@ from typing import List, Dict, Any
 from datetime import datetime
 from pydantic import BaseModel, Field
 
-from src.entity_mapping.models.entity import Entity
-from src.entity_mapping.models.relationship import Relationship
+from claimification.entity_mapping.models.entity import Entity
+from claimification.entity_mapping.models.relationship import Relationship
 
 
 class GraphMetadata(BaseModel):

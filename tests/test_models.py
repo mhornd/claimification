@@ -1,7 +1,7 @@
 """Test data models."""
 
 import pytest
-from src.models import (
+from claimification.models import (
     Claim,
     SentenceStatus,
     ClaimExtractionResult,

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "claimification"
-version = "1.0.0"
+version = "2.1.0"
 description = "Extract verifiable factual claims from LLM-generated answers"
 readme = "README.md"
 license = {text = "MIT"}
@@ -42,6 +42,7 @@ dependencies = [
     "pydantic>=2.0.0",
     "python-dotenv>=1.0.0",
     "rich>=13.0.0",
+    "mcp>=1.0.0",
 ]
 
 [project.optional-dependencies]
@@ -62,13 +63,19 @@ Repository = "https://github.com/TwoDigits/claimification"
 Issues = "https://github.com/TwoDigits/claimification/issues"
 
 [project.scripts]
-claimification = "src.main:main"
+claimification = "claimification.cli:main"
+claimification-claim-extraction = "claimification.mcp_servers.claim_extraction_server:main"
+claimification-entity-mapping = "claimification.mcp_servers.entity_mapping_server:main"
 
 [tool.setuptools]
-packages = ["src", "src.stages", "src.models", "src.prompts", "src.utils"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["claimification*"]
 
 [tool.setuptools.package-data]
-src = ["py.typed"]
+claimification = ["py.typed"]
 
 [tool.black]
 line-length = 100

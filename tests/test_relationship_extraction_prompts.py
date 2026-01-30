@@ -1,8 +1,8 @@
 """Test relationship extraction prompts."""
 
 import pytest
-from src.entity_mapping.models.entity import Entity, EntityType
-from src.entity_mapping.prompts.relationship_extraction import (
+from claimification.entity_mapping.models.entity import Entity, EntityType
+from claimification.entity_mapping.prompts.relationship_extraction import (
     SYSTEM_PROMPT,
     USER_PROMPT_TEMPLATE,
     build_relationship_extraction_prompt

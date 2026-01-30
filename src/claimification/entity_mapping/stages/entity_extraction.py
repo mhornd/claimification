@@ -5,10 +5,10 @@ from typing import List, Optional
 from pydantic import BaseModel
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 
-from src.entity_mapping.models.entity import Entity, EntityType
-from src.entity_mapping.prompts.entity_extraction import build_entity_extraction_prompt
+from claimification.entity_mapping.models.entity import Entity, EntityType
+from claimification.entity_mapping.prompts.entity_extraction import build_entity_extraction_prompt
 
 
 class EntityExtractionOutput(BaseModel):

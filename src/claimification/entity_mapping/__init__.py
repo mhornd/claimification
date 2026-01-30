@@ -1,7 +1,7 @@
 """Entity Relationship Mapping - extract knowledge graphs from text."""
 
-from src.entity_mapping.pipeline import EntityMappingPipeline
-from src.entity_mapping.models import (
+from claimification.entity_mapping.pipeline import EntityMappingPipeline
+from claimification.entity_mapping.models import (
     Entity,
     EntityType,
     Relationship,

@@ -1,8 +1,8 @@
 """Entity Relationship Mapping Pipeline - orchestrates all stages."""
 
 from typing import Optional
-from src.entity_mapping.models import KnowledgeGraph, GraphMetadata
-from src.entity_mapping.stages import (
+from claimification.entity_mapping.models import KnowledgeGraph, GraphMetadata
+from claimification.entity_mapping.stages import (
     EntityExtractionStage,
     RelationshipExtractionStage,
     RelationshipInferenceStage

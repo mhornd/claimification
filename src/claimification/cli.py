@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 from rich.console import Console
 from rich.markdown import Markdown
 
-from src.claim_extraction.pipeline import ClaimExtractionPipeline
-from src.claim_extraction.models import PipelineResult, SentenceStatus
+from claimification.claim_extraction.pipeline import ClaimExtractionPipeline
+from claimification.claim_extraction.models import PipelineResult, SentenceStatus
 
 
 # Load environment variables
