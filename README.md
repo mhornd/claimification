@@ -6,10 +6,15 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![LangChain](https://img.shields.io/badge/LangChain-Enabled-green.svg)](https://langchain.com/)
 
-Claimification is a Claude Code plugin providing two powerful text analysis features:
+Claimification is a Claude Code plugin for the twodigit-marketplace providing
 
-1. **Claim Extraction** - Extract verifiable factual claims using a 4-stage pipeline
-2. **Entity Relationship Mapping** - Extract entities and relationships to build knowledge graphs
+- 2 powerful text analysis features via MCP tools:
+  1. **Claim Extraction** - Extract verifiable factual claims using a 4-stage pipeline
+  2. **Entity Relationship Mapping** - Extract entities and relationships to build knowledge graphs
+- 8 powerful Skills for NLP and general extraction of unstructured Text
+- 1 powerful Meeting-intelligence Agent
+
+_Be aware that for the MCP tools to work you need to set OPENAI_API_KEY in your ~.zshrc file_
 
 ## Features
 
@@ -17,31 +22,31 @@ Claimification is a Claude Code plugin providing two powerful text analysis feat
 
 Extract verifiable factual claims from LLM outputs using a sophisticated 4-stage pipeline based on research from Microsoft Research.
 
-✅ **Extracting verifiable facts** from complex LLM outputs
-✅ **Filtering out opinions** and non-verifiable content
-✅ **Resolving ambiguities** using contextual information
-✅ **Creating standalone claims** that preserve critical context
+✅ **Extracting verifiable facts** from complex LLM outputs  
+✅ **Filtering out opinions** and non-verifiable content  
+✅ **Resolving ambiguities** using contextual information  
+✅ **Creating standalone claims** that preserve critical context  
 ✅ **Flagging unresolvable ambiguities** instead of guessing
 
 ### 2. Entity Relationship Mapping
 
 Transform unstructured text into queryable knowledge graphs by extracting entities and their relationships.
 
-📊 **Structure Chaos** - Convert LLM outputs into queryable knowledge structures
-🔗 **Discover Connections** - Find both explicit and implicit relationships
-🎯 **Multiple Formats** - Export as JSON or natural language summaries
+📊 **Structure Chaos** - Convert LLM outputs into queryable knowledge structures  
+🔗 **Discover Connections** - Find both explicit and implicit relationships  
+🎯 **Multiple Formats** - Export as JSON or natural language summaries  
 🤖 **LLM-Powered Inference** - Infer implicit relationships with confidence scores
 
 ### 3. Claude Code Skills & Agent
 
 Specialized extraction skills for analyzing communications, meetings, and documents.
 
-📋 **Commitment extractor** - Extract promises and deadlines from any communication
-✅ **Action Item Extractor** - Pull concrete to-dos with owners and timelines
-🎯 **Decision extractor** - Document decisions, rationale, and alternatives
-⚠️ **Risk & Liability Detector** - Identify legal risks and overpromises
-🔬 **Evidence Validator** - Verify claims with rigorous internet research
-🔍 **Contradiction Detector** - Find contradictory statements within texts
+📋 **Commitment extractor** - Extract promises and deadlines from any communication  
+✅ **Action Item Extractor** - Pull concrete to-dos with owners and timelines  
+🎯 **Decision extractor** - Document decisions, rationale, and alternatives  
+⚠️ **Risk & Liability Detector** - Identify legal risks and overpromises  
+🔬 **Evidence Validator** - Verify claims with rigorous internet research  
+🔍 **Contradiction Detector** - Find contradictory statements within texts  
 🤖 **Meeting Intelligence Agent** - Systematically transform meeting notes into structured minutes
 
 ## Architecture
