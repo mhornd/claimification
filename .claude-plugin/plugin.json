@@ -1,6 +1,6 @@
 {
   "name": "claimification",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Extract claims and map entity relationships from any text",
   "author": {
     "name": "Marlo Horndasch",
