@@ -7,7 +7,9 @@ Willkommen bei Claimification! Dieses Repository enthält ein vollständig imple
 Das Repository enthält jetzt:
 
 ✅ **Vollständige LangChain-Pipeline** mit 4 Stages
-✅ **Claude Code Plugin** mit Skill-Integration
+✅ **Claude Code Skills** für Text-Extraktion und -Analyse
+✅ **Meeting Intelligence Agent** für strukturierte Meeting-Protokolle
+✅ **MCP Servers** für Claim Extraction und Entity Mapping
 ✅ **CLI-Interface** für Kommandozeilen-Nutzung
 ✅ **Python API** für programmatische Integration
 ✅ **Umfassende Dokumentation** (README, Installation, Usage)
@@ -35,8 +37,16 @@ claimification/
 │   │   └── decomposition.py     ✅ Decomposition Prompts
 │   ├── pipeline.py              ✅ Pipeline Orchestrator
 │   └── main.py                  ✅ CLI Entry Point
-├── skills/
-│   └── extract-claims           ✅ Claude Code Skill
+├── skills/                      ✅ Claude Code Skills
+│   ├── commitment-extractor/      ✅ Track promises
+│   ├── action-item-extractor/   ✅ Extract to-dos
+│   ├── decision-extractor/        ✅ Document decisions
+│   ├── risk-liability-detector/ ✅ Identify risks
+│   ├── evidence-validator/      ✅ Validate claims
+│   ├── contradiction-detector/  ✅ Find contradictions
+│   └── meeting-intelligence/    ✅ Meeting analysis agent
+├── commands/                    ✅ Skill command wrappers
+├── agents/                      ✅ Agent configurations
 ├── examples/
 │   └── basic_usage.py           ✅ Python API Beispiel
 ├── docs/
@@ -103,10 +113,22 @@ python -m src.main \
     --format markdown
 ```
 
-### Claude Code Skill
+### Claude Code Skills
 
 ```bash
-/extract-claims
+# MCP Tools
+/extract-claims                    # Extract verifiable claims
+
+# Extraction Skills
+/commitment-extractor                # Extrackt promises and commitments
+/action-item-extractor            # Extract action items
+/decision-extractor                 # Document decisions extraction
+/risk-liability-detector          # Identify legal risks
+/evidence-validator               # Validate claims with research
+/contradiction-detector           # Find contradictions
+
+# Meeting Intelligence Agent
+/meeting-intelligence             # Transform meeting notes into minutes
 ```
 
 ## Pipeline-Flow

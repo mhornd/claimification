@@ -40,8 +40,28 @@ claimification/
 │       ├── context_builder.py     # Context window builder
 │       └── output_formatter.py    # Result formatting
 │
-├── skills/
-│   └── extract-claims              # Claude Code skill
+├── skills/                          # Claude Code skills
+│   ├── commitment-extractor/         # Track promises and commitments
+│   ├── action-item-extractor/      # Extract action items
+│   ├── decision-extractor/           # Document decisions
+│   ├── risk-liability-detector/    # Identify legal risks
+│   ├── evidence-validator/         # Validate claims with research
+│   ├── contradiction-detector/     # Find contradictions
+│   ├── uncertainty-quantification/ # Quantify uncertainty
+│   ├── audience-adapter/           # Adapt content
+│   └── meeting-intelligence/       # Meeting analysis agent
+│
+├── commands/                        # Skill command wrappers
+│   ├── commitment-extractor.md
+│   ├── action-item-extractor.md
+│   ├── decision-extractor.md
+│   ├── risk-liability-detector.md
+│   ├── evidence-validator.md
+│   ├── contradiction-detector.md
+│   └── meeting-intelligence.md
+│
+├── agents/                          # Agent configurations
+│   └── meeting-intelligence-agent.md
 │
 ├── tests/
 │   ├── __init__.py
@@ -106,6 +126,60 @@ Input (Q&A Pair)
     ↓
 Aggregated Result
 ```
+
+## Claude Code Skills Architecture
+
+### Extraction Skills
+
+Each skill follows a consistent pattern:
+
+- SKILL.md containing the full skill definition and instructions
+- Command wrapper in commands/ that invokes the skill
+- Focus on specific extraction task (commitments, actions, decisions, etc.)
+
+**Core Skills:**
+
+- **commitment-extractor**: Extracts promises, deadlines, and commitments
+- **action-item-extractor**: Extracts to-dos with owners and timelines
+- **decision-extractor**: Extracts decisions with rationale and alternatives
+- **risk-liability-detector**: Identifies legal risks and overpromises
+- **evidence-validator**: Validates claims with internet research
+- **contradiction-detector**: Finds contradictory statements
+
+### Meeting Intelligence Agent
+
+The meeting-intelligence agent is a meta-skill that:
+
+1. Takes meeting notes or transcripts as input
+2. Systematically invokes relevant extraction skills via Skill tool
+3. Compiles results into structured meeting minutes
+
+**Workflow:**
+
+```
+Meeting Notes
+    ↓
+┌─────────────────────────────────┐
+│ Meeting Intelligence Agent      │
+│                                 │
+│ 1. Invoke decision-extractor      │ ← Extracts decisions
+│ 2. Invoke action-item-extractor │ ← Extracts to-dos
+│ 3. Invoke commitment-extractor    │ ← Extracts promises
+│ 4. Invoke contradiction-detector│ ← Finds conflicts (optional)
+│ 5. Invoke risk-liability-detector│ ← Flags risks (optional)
+│                                 │
+│ 6. Compile into meeting minutes │
+└─────────────────────────────────┘
+    ↓
+Structured Meeting Minutes
+```
+
+**Key Features:**
+
+- Adapts to meeting type (Strategy/Technical/Customer/Status)
+- Always runs core skills (decisions, actions, commitments)
+- Conditionally runs quality skills (contradictions, risks, evidence)
+- Produces concise 1-2 page minutes
 
 ## LangChain Integration
 

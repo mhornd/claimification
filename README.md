@@ -7,6 +7,7 @@
 [![LangChain](https://img.shields.io/badge/LangChain-Enabled-green.svg)](https://langchain.com/)
 
 Claimification is a Claude Code plugin providing two powerful text analysis features:
+
 1. **Claim Extraction** - Extract verifiable factual claims using a 4-stage pipeline
 2. **Entity Relationship Mapping** - Extract entities and relationships to build knowledge graphs
 
@@ -31,13 +32,43 @@ Transform unstructured text into queryable knowledge graphs by extracting entiti
 🎯 **Multiple Formats** - Export as JSON or natural language summaries
 🤖 **LLM-Powered Inference** - Infer implicit relationships with confidence scores
 
-## Dual MCP Servers
+### 3. Claude Code Skills & Agent
 
-Claimification exposes both features through separate MCP servers:
-- **claim-extraction** - Extract verifiable claims
-- **entity-mapping** - Map entity relationships
+Specialized extraction skills for analyzing communications, meetings, and documents.
 
-Both can be used independently or together for comprehensive text analysis.
+📋 **Commitment extractor** - Extract promises and deadlines from any communication
+✅ **Action Item Extractor** - Pull concrete to-dos with owners and timelines
+🎯 **Decision extractor** - Document decisions, rationale, and alternatives
+⚠️ **Risk & Liability Detector** - Identify legal risks and overpromises
+🔬 **Evidence Validator** - Verify claims with rigorous internet research
+🔍 **Contradiction Detector** - Find contradictory statements within texts
+🤖 **Meeting Intelligence Agent** - Systematically transform meeting notes into structured minutes
+
+## Architecture
+
+Claimification provides multiple ways to analyze and structure text:
+
+### MCP Servers
+
+- **claim-extraction** - Extract verifiable claims (MCP tool)
+- **entity-mapping** - Map entity relationships (MCP tool)
+
+### Claude Code Skills
+
+- **commitment-extractor** - Track commitments and promises
+- **action-item-extractor** - Extract action items and to-dos
+- **decision-extractor** - Document decisions and rationale
+- **risk-liability-detector** - Identify legal risks
+- **evidence-validator** - Validate claims with research
+- **contradiction-detector** - Detect contradictions
+- **uncertainty-quantification** - Quantify uncertainty in claims
+- **audience-adapter** - Adapt content for different audiences
+
+### Agent
+
+- **meeting-intelligence** - Systematically process meetings using all extraction skills
+
+All components can be used independently or together for comprehensive text analysis.
 
 ## Quick Start
 
@@ -70,11 +101,20 @@ cp .env.example .env
 # Install the plugin in Claude Code
 /plugin install claimification
 
-# Use claim extraction
-/extract-claims
+# Use MCP tools
+/extract-claims                    # Extract verifiable claims
+# extract_entities_and_relationships  # Map entity relationships (MCP tool)
 
-# Use entity mapping
-# (Available through MCP tool: extract_entities_and_relationships)
+# Use extraction skills
+/commitment-extractor                # Track promises and commitments
+/action-item-extractor            # Extract action items
+/decision-extractor                 # Document decisions
+/risk-liability-detector          # Identify legal risks
+/evidence-validator               # Validate claims with research
+/contradiction-detector           # Find contradictions
+
+# Use the meeting intelligence agent
+/meeting-intelligence             # Transform meeting notes into structured minutes
 ```
 
 ### Using Programmatically
@@ -109,6 +149,70 @@ python -m src.main \
     --answer "Argentina's inflation rate reached 25.5% monthly..." \
     --format markdown
 ```
+
+## Claude Code Skills
+
+Claimification includes specialized extraction skills for analyzing communications and documents:
+
+### Core Extraction Skills
+
+**📋 Commitment extractor** (`/commitment-extractor`)
+
+- Extract promises, commitments, and deadlines from emails, meetings, and contracts
+- Distinguish hard vs. soft commitments
+- Track who committed to what by when
+- Identify missing deadlines or owners
+
+**✅ Action Item Extractor** (`/action-item-extractor`)
+
+- Pull concrete to-dos from meetings, emails, and documents
+- Identify what needs to be done, by whom, and when
+- Prioritize by urgency (Urgent/High/Medium/Low)
+- Flag unassigned tasks and missing deadlines
+
+**🎯 Decision extractor** (`/decision-extractor`)
+
+- Extract decisions and their rationale from discussions
+- Document alternatives that were considered
+- Track who decided what and why
+- Identify open or reversed decisions
+
+### Quality & Risk Skills
+
+**⚠️ Risk & Liability Detector** (`/risk-liability-detector`)
+
+- Identify legal risks and overpromises in marketing copy
+- Flag missing disclaimers and regulatory violations
+- Detect absolute guarantees that create liability
+- Categorize risks (Legal/Regulatory/Reputational)
+
+**🔬 Evidence Validator** (`/evidence-validator`)
+
+- Validate factual claims with rigorous internet research
+- Require double verification from reputable sources
+- Assess evidence strength (Strong/Moderate/Weak/None)
+- Flag unsupported claims with missing evidence
+
+**🔍 Contradiction Detector** (`/contradiction-detector`)
+
+- Find contradictory statements within documents
+- Compare claim pairs for logical inconsistencies
+- Categorize contradictions (Definite/Likely/Possible)
+- Suggest fixes for identified conflicts
+
+### Meeting Intelligence Agent
+
+**🤖 Meeting Intelligence** (`/meeting-intelligence`)
+
+- Systematically transform meeting notes into structured minutes
+- Automatically applies relevant extraction skills:
+  - Extracts decisions (via decision-extractor)
+  - Identifies action items (via action-item-extractor)
+  - Tracks commitments (via commitment-extractor)
+  - Detects contradictions (via contradiction-detector)
+  - Flags risks (via risk-liability-detector)
+- Produces concise, actionable meeting minutes
+- Adapts to meeting type (Strategy/Technical/Customer/Status)
 
 ## How It Works
 
@@ -213,16 +317,19 @@ CLAIMIFICATION_TIMEOUT_SECONDS=30
 ## Documentation
 
 ### Claim Extraction
+
 - [Installation Guide](docs/INSTALLATION.md) - Detailed setup instructions
 - [Usage Guide](docs/USAGE.md) - How to use claim extraction
 - [API Reference](docs/API.md) - Programmatic API documentation
 - [Core Principles](docs/PRINCIPLES.md) - Explanation of claim extraction principles
 
 ### Entity Relationship Mapping
+
 - [Usage Guide](docs/entity_mapping/USAGE.md) - How to use entity mapping
 - [API Reference](docs/entity_mapping/API.md) - Entity mapping API documentation
 
 ### General
+
 - [Project Structure](PROJECT_STRUCTURE.md) - Architecture and design decisions
 
 ## Use Cases
@@ -230,19 +337,36 @@ CLAIMIFICATION_TIMEOUT_SECONDS=30
 **AI Safety & Verification**
 
 - Fact-check LLM outputs before using them in production
-- Identify which claims need verification
+- Validate claims with evidence from reputable sources
+- Detect contradictions in AI-generated content
 - Integration with groundedness detection systems
+
+**Meeting & Communication Management**
+
+- Transform meeting notes into actionable minutes
+- Track commitments and promises automatically
+- Extract action items with owners and deadlines
+- Document decisions and rationale for future reference
+
+**Legal & Compliance**
+
+- Identify legal risks in marketing copy and contracts
+- Flag overpromises and missing disclaimers
+- Ensure regulatory compliance in customer communications
+- Validate factual claims before publication
 
 **Research & Analysis**
 
 - Extract structured claims from research summaries
-- Break down complex documents into verifiable statements
+- Validate claims with rigorous evidence checking
+- Build knowledge graphs from unstructured text
 - Create claim databases for meta-analysis
 
-**Enterprise Compliance**
+**Enterprise Workflows**
 
 - Verify accuracy of AI-generated reports
 - Extract auditable claims from automated summaries
+- Structure chaos from brainstorming sessions
 - Ensure LLM outputs meet quality standards
 
 ## Development
@@ -263,15 +387,26 @@ python examples/basic_usage.py
 
 ```
 claimification/
-├── src/                  # Source code
-│   ├── stages/          # Pipeline stages
-│   ├── models/          # Data models
-│   ├── prompts/         # LLM prompts
-│   └── utils/           # Utilities
-├── skills/              # Claude Code skills
-├── tests/               # Test suite
-├── examples/            # Usage examples
-└── docs/                # Documentation
+├── src/                           # Source code
+│   ├── stages/                   # Pipeline stages
+│   ├── models/                   # Data models
+│   ├── prompts/                  # LLM prompts
+│   └── utils/                    # Utilities
+├── skills/                        # Claude Code skills
+│   ├── commitment-extractor/       # Track promises and commitments
+│   ├── action-item-extractor/    # Extract action items
+│   ├── decision-extractor/         # Document decisions
+│   ├── risk-liability-detector/  # Identify legal risks
+│   ├── evidence-validator/       # Validate claims
+│   ├── contradiction-detector/   # Find contradictions
+│   ├── uncertainty-quantification/ # Quantify uncertainty
+│   ├── audience-adapter/         # Adapt content
+│   └── meeting-intelligence/     # Meeting analysis agent
+├── commands/                      # Skill command wrappers
+├── agents/                        # Agent configurations
+├── tests/                         # Test suite
+├── examples/                      # Usage examples
+└── docs/                          # Documentation
 ```
 
 ## Research Foundation
