@@ -6,6 +6,18 @@ import sys
 import json
 import asyncio
 from typing import Any
+from pathlib import Path
+
+# Load environment variables from .env file
+from dotenv import load_dotenv
+
+# Get the project root directory (parent of mcp_servers)
+project_root = Path(__file__).parent.parent
+env_path = project_root / ".env"
+
+# Load .env file if it exists
+if env_path.exists():
+    load_dotenv(env_path)
 
 # MCP SDK imports
 from mcp.server import Server

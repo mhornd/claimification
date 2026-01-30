@@ -1,7 +1,7 @@
 {
   "id": "claimification",
   "name": "Claimification",
-  "version": "1.1.0",
+  "version": "2.0.1",
   "description": "Extract and verify factual claims from any text",
   "longDescription": "Claimification implements a sophisticated 4-stage pipeline based on research from Microsoft Research. It breaks down text into atomic, verifiable factual statements that can be independently fact-checked. The pipeline includes sentence splitting, verifiable content detection, ambiguity resolution, and atomic claim extraction.",
   "author": {
@@ -70,15 +70,14 @@
       "command": "python",
       "args": ["mcp_server.py"],
       "env": {
-        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
-        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
       }
     }
   },
   "installation": {
     "command": "pip install -r requirements.txt",
-    "env_required": ["OPENAI_API_KEY", "ANTHROPIC_API_KEY"],
-    "env_note": "At least one API key (OpenAI or Anthropic) is required"
+    "env_required": ["OPENAI_API_KEY"],
+    "env_note": "An OPENAI_API_KEY is required"
   },
   "screenshots": [],
   "featured": true,

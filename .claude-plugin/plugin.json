@@ -1,6 +1,6 @@
 {
   "name": "claimification",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Extract claims and map entity relationships from any text",
   "author": {
     "name": "Marlo Horndasch",
@@ -26,16 +26,16 @@
       "command": "python",
       "args": ["mcp_servers/claim_extraction_server.py"],
       "env": {
-        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
-        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+        "PYTHONPATH": "${PLUGIN_DIR}",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
       }
     },
     "entity-mapping": {
       "command": "python",
       "args": ["mcp_servers/entity_mapping_server.py"],
       "env": {
-        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
-        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+        "PYTHONPATH": "${PLUGIN_DIR}",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
       }
     }
   }
