@@ -1,17 +1,5 @@
 ## Qualität & Konsistenz
 
-**Contradiction Detection Pipeline**
-
-- Identifiziere widersprüchliche Aussagen innerhalb desselben Texts oder über mehrere Generationen hinweg
-- Nutze Claim-Paare und prüfe auf logische Widersprüche
-- Besonders relevant für lange Dokumente oder Multi-Agent-Outputs
-
-**Uncertainty Quantification Layer**
-
-- Analysiere sprachliche Marker für Unsicherheit ("könnte", "möglicherweise", "vermutlich")
-- Mappe diese auf Confidence-Scores pro Aussage
-- Visualisiere Uncertainty-Heatmaps für generierte Reports
-
 **Temporal Consistency Checker**
 
 - Validiere zeitliche Abfolgen und kausale Beziehungen
@@ -19,12 +7,6 @@
 - Wichtig für historische Texte, Timelines, Narrativen
 
 ## Strukturierung & Extraktion
-
-**Entity Relationship Mapper**
-
-- Extrahiere nicht nur Entities, sondern mappe vollständige Beziehungsnetzwerke
-- Generiere Knowledge Graphs aus unstrukturiertem LLM-Output
-- Identifiziere implizite Beziehungen durch Co-Occurrence-Analyse
 
 **Argument Structure Parser**
 
