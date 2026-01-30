@@ -1,7 +1,7 @@
 {
   "id": "claimification",
   "name": "Claimification",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Extract and verify factual claims from any text",
   "longDescription": "Claimification implements a sophisticated 4-stage pipeline based on research from Microsoft Research. It breaks down text into atomic, verifiable factual statements that can be independently fact-checked. The pipeline includes sentence splitting, verifiable content detection, ambiguity resolution, and atomic claim extraction.",
   "author": {
